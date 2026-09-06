@@ -21,7 +21,7 @@ function icon($name, $class = 'h-5 w-5') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Asia Linen offers towels, pillowcases, sheets and duvets for hotels. Explore our linen collection and request a rental quotation.">
     <meta name="theme-color" content="#092849">
-    <title>Asia Linen — Linen Rental for Hotels</title>
+    <title>Rental Linen Bali for Hotels &amp; Villas | Asia Linen</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preload" as="image" href="assets/images/hero.jpg">
 </head>
@@ -48,7 +48,7 @@ function icon($name, $class = 'h-5 w-5') {
         <div class="wrap py-20 md:py-24 lg:py-28">
             <div class="max-w-2xl">
                 <p class="eyebrow !text-[#e3b873]">ASIA LINEN · LINEN RENTAL</p>
-                <h1 class="mt-5 max-w-xl font-display text-[42px] leading-[1.08] tracking-tight sm:text-6xl lg:text-[66px]">Beautiful Linen.<br>Comfort in<br>Every Room.</h1>
+                <h1 class="mt-5 max-w-xl font-display text-[42px] leading-[1.08] tracking-tight sm:text-6xl lg:text-[66px]">Linen Rental in Bali<br>for Hotels &amp; Villas</h1>
                 <p class="mt-6 max-w-lg text-base leading-7 text-slate-100 md:text-lg">Towels and bed linen to support your hotel’s everyday needs. Explore our collections and let us prepare a quotation for your property.</p>
                 <div class="mt-8 flex flex-wrap gap-3"><a href="#koleksi" class="btn border border-white/70 bg-white/5 hover:bg-white/15">Explore the Collection <?= icon('arrow') ?></a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn bg-white text-navy hover:bg-cream">Request a Quote <?= icon('arrow') ?></a></div>
                 <div class="mt-10 flex flex-wrap gap-x-7 gap-y-4 border-t border-white/25 pt-6 text-[10px] leading-5 tracking-[.12em] uppercase"><span class="flex items-center gap-3"><?= icon('layers', 'h-7 w-7 text-[#e3b873]') ?>Bed Linen<br>& Towels</span><span class="flex items-center gap-3"><?= icon('calendar', 'h-7 w-7 text-[#e3b873]') ?>No Minimum<br>Rental Period</span></div>
