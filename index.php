@@ -2,6 +2,23 @@
 $phone = '0822-3796-3375';
 $whatsappBase = 'https://wa.me/6282237963375';
 $quoteUrl = $whatsappBase . '?text=' . rawurlencode('Hello Asia Linen, I would like to request a linen rental quotation.');
+// Customer relationships supplied by the site owner; unverified property logos remain text-only.
+$customers = [
+    ['name' => 'Aloft Bali Kuta at Beachwalk', 'logo' => null],
+    ['name' => 'InterContinental Bali Sanur Resort', 'logo' => 'intercontinental-sanur.png'],
+    ['name' => 'Aloft Petitenget', 'logo' => null],
+    ['name' => 'Crystal Hotel', 'logo' => null],
+    ['name' => 'LV8 Resort Hotel', 'logo' => null],
+    ['name' => 'Seminyak Private Villas', 'logo' => null],
+    ['name' => 'K-Club Ubud', 'logo' => 'k-club-ubud.webp'],
+    ['name' => 'Mahagiri', 'logo' => null],
+    ['name' => 'Swiss-Belhotel Jimbaran', 'logo' => null],
+    ['name' => 'Mercure Resort Sanur', 'logo' => 'mercure.svg'],
+    ['name' => 'Four Points by Sheraton Bali, Seminyak', 'logo' => null],
+    ['name' => 'Fairfield by Marriott Bali South Kuta', 'logo' => null],
+    ['name' => 'The Amala Seminyak', 'logo' => 'amala.png'],
+    ['name' => 'Sovereign Bali Hotel', 'logo' => 'sovereign.png'],
+];
 $products = [
     ['name' => 'Towels & Bath Mats', 'image' => 'towels.jpg', 'alt' => 'Illustration of white towels arranged in a villa bathroom', 'tag' => 'BATH COLLECTION', 'description' => 'A comfortable touch for your guest bathroom essentials.', 'spec' => 'Bath Towel · Bath Mat · Hand Towel · Face Towel', 'detail' => 'White · A choice of sizes for your needs', 'items' => ['Bath Towel — 68 × 140', 'Bath Mat — 50 × 75', 'Hand Towel — 40 × 70', 'Face Towel — 30 × 30']],
     ['name' => 'Pillowcases', 'image' => 'pillows.jpg', 'alt' => 'Illustration of white pillows and folded sheets', 'tag' => 'PILLOW COLLECTION', 'description' => 'Plain white linen for a neatly finished bed.', 'spec' => 'Available in 50 × 70 and 50 × 90', 'detail' => 'CVC · TC 200 / TC 250 · Plain white', 'items' => ['50 × 70 — CVC TC 200 or TC 250', '50 × 90 — CVC TC 200 or TC 250']],
@@ -82,6 +99,29 @@ function icon($name, $class = 'h-5 w-5') {
     <section id="penawaran" class="bg-navy py-16 text-white md:py-20"><div class="wrap grid gap-12 lg:grid-cols-2"><div><p class="eyebrow !text-[#e3b873]">LET’S DISCUSS YOUR REQUIREMENTS</p><h2 class="section-title mt-4">Linen for your rooms.<br>A quote for your needs.</h2><p class="mt-6 max-w-md leading-7 text-slate-300">Tell us what you need and continue to WhatsApp with your request ready to send to the Asia Linen team.</p><a href="tel:+6282237963375" class="mt-8 inline-flex items-center gap-4 text-xl"><?= icon('phone','h-7 w-7 text-[#e3b873]') ?><?= e($phone) ?></a><p class="mt-3 text-sm text-slate-300">Contact our team for quotations and availability.</p></div>
     <form id="quote-form" class="rounded-sm bg-white p-6 text-navy md:p-8"><h3 class="font-display text-2xl">Prepare Your Quote Request</h3><div class="mt-6 grid gap-4 sm:grid-cols-2"><label class="text-xs font-semibold">Your name<input required name="name" autocomplete="name" maxlength="100" class="field" placeholder="Full name"></label><label class="text-xs font-semibold">Property name<input required name="property" autocomplete="organization" maxlength="150" class="field" placeholder="Hotel / property name"></label><label class="text-xs font-semibold">Collection<select name="product" id="product-select" class="field"><?php foreach ($products as $product): ?><option><?= e($product['name']) ?></option><?php endforeach; ?></select></label><label class="text-xs font-semibold">Rental start date<input required type="date" name="date" class="field"></label><label class="text-xs font-semibold sm:col-span-2">Your requirements<textarea required name="details" rows="3" maxlength="2000" class="field" placeholder="Linen types and quantities, rental duration, and property location"></textarea></label></div><button type="submit" class="btn btn-primary mt-5 w-full">Continue to WhatsApp <?= icon('arrow') ?></button><p class="mt-3 text-xs leading-5 text-slate-500">Your request opens in WhatsApp. Review the message and tap Send to share it with our team.</p></form>
     </div></section>
+    <section id="customers" aria-labelledby="customers-heading" class="border-b border-slate-100 bg-cream py-14 md:py-16">
+        <div class="wrap">
+            <div class="mx-auto max-w-2xl text-center">
+                <p class="eyebrow">OUR CUSTOMERS</p>
+                <h2 id="customers-heading" class="section-title mt-3">Hotels &amp; Villas We Have Served</h2>
+                <p class="mt-4 text-sm leading-7 text-slate-600">A selection of hotels and villas that have used our linen services.</p>
+            </div>
+            <ul class="mt-9 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+                <?php foreach ($customers as $customer): ?>
+                    <li class="flex min-h-36 flex-col items-center justify-center gap-3 rounded-sm border border-slate-200 bg-white px-4 py-5 text-center">
+                        <?php if ($customer['logo']): ?>
+                            <div class="flex h-16 w-full items-center justify-center <?= $customer['logo'] === 'amala.png' ? 'rounded-sm bg-navy' : '' ?>">
+                                <img src="assets/images/customers/<?= e($customer['logo']) ?>" alt="" loading="lazy" width="160" height="64" class="max-h-14 w-auto max-w-full object-contain">
+                            </div>
+                            <p class="text-[11px] leading-5 text-slate-600"><?= e($customer['name']) ?></p>
+                        <?php else: ?>
+                            <p class="font-display text-lg leading-6 text-navy"><?= e($customer['name']) ?></p>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section>
 </main>
 <footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]">LAUNDRY RENTALS</p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600">Linen and towels to support the everyday needs of your hotel.</p></div><div><h2 class="text-sm font-semibold">Visit & Contact Us</h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600">Jalan Gunung Patas 1 No. 81B<br>Padang Sambian Kelod, Denpasar Barat<br><a class="hover:text-blue" href="tel:+6282237963375"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi">Linen Collection</a><a href="#cara-sewa">How to Rent</a><a href="#faq">Rental Terms</a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer">Request a Quote ↗</a></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500"><p>© <?= date('Y') ?> Asia Linen.</p><p>Illustrative images, not photographs of actual products.</p></div></div></footer>
 <script>
