@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@source "../index.php";
+@theme {
+  --color-navy: #092849;
+  --color-blue: #104d80;
+  --color-gold: #b98c49;
+  --color-cream: #f8f6f2;
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
+}
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { color: var(--color-navy); }
+  button, summary { cursor: pointer; }
+  :focus-visible { outline: 3px solid #b98c49; outline-offset: 5px; }
+  ::selection { background: #e7d6b9; }
+}
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-7xl px-6 lg:px-10; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-gold; }
+  .btn { @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3 text-sm font-semibold transition-colors; }
+  .btn-primary { @apply bg-blue text-white hover:bg-navy; }
+  .section-title { @apply font-display text-3xl leading-tight md:text-[42px]; }
+  .field { @apply mt-2 w-full rounded-sm border border-slate-300 bg-white px-4 py-3 text-sm text-navy focus:border-gold; }
+}
+.hero-shade { background: linear-gradient(90deg,rgba(5,27,49,.94) 0%,rgba(5,27,49,.78) 35%,rgba(5,27,49,.13) 72%); }
+details[open] summary .plus { transform: rotate(45deg); }
+@media (max-width: 767px) { .hero-shade { background: linear-gradient(90deg,rgba(5,27,49,.9),rgba(5,27,49,.5)); } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
