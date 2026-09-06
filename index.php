@@ -35,10 +35,33 @@ function icon($name, $class = 'h-5 w-5') {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27RV0808TM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-27RV0808TM');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Asia Linen offers towels, pillowcases, sheets and duvets for hotels. Explore our linen collection and request a rental quotation.">
+    <meta name="description" content="Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.">
     <meta name="theme-color" content="#092849">
     <title>Rental Linen Bali for Hotels &amp; Villas | Asia Linen</title>
+    <link rel="canonical" href="https://asialinen.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:site_name" content="Asia Linen">
+    <meta property="og:title" content="Rental Linen Bali for Hotels &amp; Villas | Asia Linen">
+    <meta property="og:description" content="Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.">
+    <meta property="og:url" content="https://asialinen.com/">
+    <meta property="og:image" content="https://asialinen.com/assets/images/hero.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:alt" content="Illustration of a Bali villa bedroom with white bed linen">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rental Linen Bali for Hotels &amp; Villas | Asia Linen">
+    <meta name="twitter:description" content="Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.">
+    <meta name="twitter:image" content="https://asialinen.com/assets/images/hero.jpg">
+    <meta name="twitter:image:alt" content="Illustration of a Bali villa bedroom with white bed linen">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preload" as="image" href="assets/images/hero.jpg">
 </head>
@@ -130,8 +153,21 @@ const menu = document.getElementById('mobile-menu');
 menuToggle.addEventListener('click', () => { const open = menuToggle.getAttribute('aria-expanded') !== 'true'; menuToggle.setAttribute('aria-expanded', String(open)); menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); menu.hidden = !open; });
 menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.hidden = true; menuToggle.setAttribute('aria-expanded', 'false'); menuToggle.setAttribute('aria-label','Open menu'); }));
 document.addEventListener('keydown', event => { if (event.key === 'Escape' && !menu.hidden) { menu.hidden = true; menuToggle.setAttribute('aria-expanded','false'); menuToggle.setAttribute('aria-label','Open menu'); menuToggle.focus(); } });
+// Track only the interaction source, never WhatsApp URLs or form contents.
+document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+    link.addEventListener('click', () => {
+        gtag('event', 'whatsapp_click', {
+            contact_source: link.closest('section')?.id || (link.closest('header') ? 'header' : 'footer'),
+            transport_type: 'beacon'
+        });
+    });
+});
 const form = document.getElementById('quote-form');
-form.addEventListener('submit', event => { event.preventDefault(); const data = new FormData(form); const date = new Date(data.get('date') + 'T12:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}); const message = `Hello Asia Linen, I would like to request a linen rental quotation.\n\nName: ${data.get('name').trim()}\nProperty: ${data.get('property').trim()}\nCollection: ${data.get('product')}\nRental start date: ${date}\nRequirements: ${data.get('details').trim()}`; window.location.assign(<?= json_encode($whatsappBase) ?> + '?text=' + encodeURIComponent(message)); });
+form.addEventListener('submit', event => { event.preventDefault(); const data = new FormData(form); const date = new Date(data.get('date') + 'T12:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'long', year:'numeric'}); const message = `Hello Asia Linen, I would like to request a linen rental quotation.\n\nName: ${data.get('name').trim()}\nProperty: ${data.get('property').trim()}\nCollection: ${data.get('product')}\nRental start date: ${date}\nRequirements: ${data.get('details').trim()}`; const url = <?= json_encode($whatsappBase) ?> + '?text=' + encodeURIComponent(message);
+    let opened = false;
+    const openWhatsApp = () => { if (!opened) { opened = true; window.location.assign(url); } };
+    setTimeout(openWhatsApp, 1000);
+    gtag('event', 'whatsapp_click', { contact_source: 'quote_form', transport_type: 'beacon', event_callback: openWhatsApp, event_timeout: 1000 }); });
 </script>
 </body>
 </html>
