@@ -27,3 +27,18 @@
 details[open] summary .plus { transform: rotate(45deg); }
 @media (max-width: 767px) { .hero-shade { background: linear-gradient(90deg,rgba(5,27,49,.9),rgba(5,27,49,.5)); } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+
+/* Keep each product and its rate together on narrow screens. */
+@media (max-width: 767px) {
+  .price-table { display: block; min-width: 0; }
+  .price-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .price-table tbody { display: block; }
+  .price-table tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 7px 12px; padding: 20px 16px; }
+  .price-table tbody th { grid-column: 1; grid-row: 1; padding: 0 0 7px; font-size: 14px; align-self: start; }
+  .price-table tbody td { padding: 0; }
+  .price-table tbody td[data-label] { grid-column: 1 / -1; display: grid; grid-template-columns: 86px minmax(0, 1fr); column-gap: 10px; font-size: 12px; }
+  .price-table tbody td[data-label]::before { content: attr(data-label); color: #64748b; }
+  .price-table tbody td:last-child { grid-column: 2; grid-row: 1; font-size: 15px; }
+  .price-table tbody td:last-child::after { content: '/ day'; display: block; font-size: 10px; font-weight: 400; color: #64748b; margin-top: 2px; }
+  .price-table-region { overflow: visible; }
+}

@@ -74,6 +74,8 @@ function icon($name, $class = 'h-5 w-5') {
     <meta name="description" content="Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.">
     <meta name="theme-color" content="#092849">
     <title>Rental Linen Bali for Hotels &amp; Villas | Asia Linen</title>
+    <link rel="icon" href="favicon.ico?v=1" type="image/x-icon" sizes="16x16 32x32 48x48 64x64">
+    <link rel="icon" href="assets/images/favicon.svg?v=1" type="image/svg+xml">
     <link rel="canonical" href="https://asialinen.com/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_GB">
@@ -145,21 +147,20 @@ function icon($name, $class = 'h-5 w-5') {
                 <div class="max-w-2xl"><p class="eyebrow">THE LINEN COLLECTION · 2026</p><h2 id="prices-heading" class="section-title mt-3">Rental Price List</h2><p class="mt-4 text-sm leading-7 text-slate-600">Find the right linen for your rooms, with daily rental rates at a glance.</p></div>
                 <span class="w-fit rounded-sm border border-gold/30 bg-white px-4 py-3 text-xs font-semibold tracking-wide text-navy">IDR / day</span>
             </div>
-            <nav aria-label="Price list categories" class="mt-7 flex flex-wrap gap-2">
-                <?php foreach ($rentalPrices as $group): ?><a href="#<?= e($group['id']) ?>" class="rounded-sm border border-slate-300 bg-white px-4 py-3 text-xs font-semibold transition-colors hover:border-gold hover:text-blue"><?= e($group['name']) ?></a><?php endforeach; ?>
+            <nav aria-label="Price list categories" class="price-categories mt-7 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+                <?php foreach ($rentalPrices as $group): ?><a href="#<?= e($group['id']) ?>" class="flex min-h-12 items-center justify-center rounded-sm border border-slate-300 bg-white px-3 py-3 text-center text-xs font-semibold transition-colors hover:border-gold hover:text-blue"><?= e($group['name']) ?></a><?php endforeach; ?>
             </nav>
-            <p class="mt-5 text-xs leading-5 text-slate-500 sm:hidden">Swipe each table sideways to see all product details and rates.</p>
             <div class="mt-6 space-y-6">
                 <?php foreach ($rentalPrices as $group): ?>
                 <div id="<?= e($group['id']) ?>" class="overflow-hidden rounded-sm border border-slate-200 bg-white">
                     <div class="flex flex-wrap items-center justify-between gap-2 border-l-4 border-gold bg-navy px-5 py-4 text-white"><h3 id="<?= e($group['id']) ?>-heading" class="font-display text-xl"><?= e($group['name']) ?></h3><p class="text-xs text-slate-200"><?= e($group['note']) ?></p></div>
-                    <div class="overflow-x-auto" role="region" aria-labelledby="<?= e($group['id']) ?>-heading" tabindex="0">
-                        <table class="w-full min-w-[660px] table-fixed text-left text-sm">
+                    <div class="price-table-region overflow-x-auto" role="region" aria-labelledby="<?= e($group['id']) ?>-heading" tabindex="0">
+                        <table class="price-table w-full min-w-[660px] table-fixed text-left text-sm">
                             <caption class="sr-only"><?= e($group['name']) ?> daily rental rates in Indonesian rupiah</caption>
                             <thead class="border-b border-slate-200 bg-slate-50 text-[10px] uppercase tracking-wider text-slate-500"><tr><th scope="col" class="w-[22%] px-5 py-3 font-semibold">Item</th><th scope="col" class="w-[17%] px-4 py-3 font-semibold">Size</th><th scope="col" class="w-[28%] px-4 py-3 font-semibold">Specification</th><th scope="col" class="w-[16%] px-4 py-3 font-semibold">Color</th><th scope="col" class="w-[17%] px-5 py-3 text-right font-semibold">Rental / day</th></tr></thead>
                             <tbody class="divide-y divide-slate-100">
                             <?php foreach ($group['rows'] as [$item, $size, $specification, $color, $rate]): ?>
-                                <tr class="transition-colors hover:bg-cream"><th scope="row" class="px-5 py-4 font-semibold text-navy"><?= e($item) ?></th><td class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($size) ?></td><td class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($specification) ?></td><td class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($color) ?></td><td class="whitespace-nowrap px-5 py-4 text-right font-semibold tabular-nums text-blue"><span class="mr-1 text-xs font-normal text-slate-500">Rp</span><?= number_format($rate, 0, '.', ',') ?></td></tr>
+                                <tr class="transition-colors hover:bg-cream"><th scope="row" class="px-5 py-4 font-semibold text-navy"><?= e($item) ?></th><td data-label="Size" class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($size) ?></td><td data-label="Specification" class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($specification) ?></td><td data-label="Color" class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($color) ?></td><td class="whitespace-nowrap px-5 py-4 text-right font-semibold tabular-nums text-blue"><span class="mr-1 text-xs font-normal text-slate-500">Rp</span><?= number_format($rate, 0, '.', ',') ?></td></tr>
                             <?php endforeach; ?>
                             </tbody>
                         </table>
@@ -167,7 +168,7 @@ function icon($name, $class = 'h-5 w-5') {
                 </div>
                 <?php endforeach; ?>
             </div>
-            <div class="mt-7 flex flex-col justify-between gap-5 sm:flex-row sm:items-center"><p class="max-w-xl text-xs leading-6 text-slate-600">Rates shown in Indonesian rupiah per day. Confirm sizes, availability and delivery arrangements with our team when booking.</p><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary shrink-0">Request a Quote on WhatsApp <?= icon('arrow') ?></a></div>
+            <div class="mt-7 flex flex-col justify-between gap-5 sm:flex-row sm:items-center"><p class="max-w-xl text-xs leading-6 text-slate-600">Rates shown in Indonesian rupiah per day. Confirm sizes, availability and delivery arrangements with our team when booking.</p><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary shrink-0">Get a WhatsApp Quote <?= icon('arrow') ?></a></div>
         </div>
     </section>
     <section id="cara-sewa" class="bg-cream py-16 md:py-24"><div class="wrap grid items-center gap-12 lg:grid-cols-2">
