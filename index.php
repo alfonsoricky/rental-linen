@@ -91,7 +91,7 @@ function icon($name, $class = 'h-5 w-5') {
     <meta name="twitter:description" content="Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.">
     <meta name="twitter:image" content="https://asialinen.com/assets/images/hero.jpg">
     <meta name="twitter:image:alt" content="Illustration of a Bali villa bedroom with white bed linen">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="preload" as="image" href="assets/images/hero.jpg">
 </head>
 <body class="bg-white font-sans antialiased">
@@ -153,7 +153,7 @@ function icon($name, $class = 'h-5 w-5') {
             <div class="mt-6 space-y-6">
                 <?php foreach ($rentalPrices as $group): ?>
                 <div id="<?= e($group['id']) ?>" class="overflow-hidden rounded-sm border border-slate-200 bg-white">
-                    <div class="flex flex-wrap items-center justify-between gap-2 border-l-4 border-gold bg-navy px-5 py-4 text-white"><h3 id="<?= e($group['id']) ?>-heading" class="font-display text-xl"><?= e($group['name']) ?></h3><p class="text-xs text-slate-200"><?= e($group['note']) ?></p></div>
+                    <div class="price-group-heading border-l-4 border-gold bg-navy text-white"><h3 id="<?= e($group['id']) ?>-heading" class="font-display text-xl"><?= e($group['name']) ?></h3><p class="text-xs text-slate-200"><?= e($group['note']) ?></p></div>
                     <div class="price-table-region overflow-x-auto" role="region" aria-labelledby="<?= e($group['id']) ?>-heading" tabindex="0">
                         <table class="price-table w-full min-w-[660px] table-fixed text-left text-sm">
                             <caption class="sr-only"><?= e($group['name']) ?> daily rental rates in Indonesian rupiah</caption>
