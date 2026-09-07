@@ -25,6 +25,33 @@ $products = [
     ['name' => 'Sheets & Duvets', 'image' => 'hero.jpg', 'alt' => 'Illustration of a bed with white linen in a Bali villa', 'tag' => 'BED COLLECTION', 'description' => 'Complete your rooms with single and double bed linen.', 'spec' => 'Single & Double', 'detail' => 'CVC · TC 200 / TC 250 · Plain white', 'items' => ['Double Sheet — 300 × 300', 'Single Sheet — 210 × 300', 'Double Duvet — 270 × 235', 'Single Duvet — 170 × 240']],
     ['name' => 'Custom Selection', 'image' => 'towels.jpg', 'alt' => 'Illustration of folded white towels and their texture', 'tag' => 'YOUR LINEN SELECTION', 'description' => 'Combine linen to suit the needs of your property.', 'spec' => 'Mixed linen selections & pool towels', 'detail' => 'Pool Towel · Dark green / dark blue', 'items' => ['Choose linen from across our collections', 'Pool Towel — dark green or dark blue', 'Pool towel specifications confirmed when booking']],
 ];
+$rentalPrices = [
+    ['id' => 'towel-prices', 'name' => 'Towels & Bath Mats', 'note' => 'Everyday bathroom essentials', 'rows' => [
+        ['Bath Towel', '68 × 140', '30/2 · 550 g/m² · 524 g/pc', 'White', 3000],
+        ['Bath Mat', '50 × 75', '30/2 · 1,000 g/m² · 375 g/pc', 'White', 2500],
+        ['Hand Towel', '40 × 70', '30/2 · 550 g/m² · 154 g/pc', 'White', 1500],
+        ['Face Towel', '30 × 30', '30/2 · 550 g/m² · 50 g/pc', 'White', 1200],
+    ]],
+    ['id' => 'tc200-prices', 'name' => 'Bed Linen · TC 200', 'note' => 'CVC · Plain white', 'rows' => [
+        ['Pillowcase', '50 × 70', 'CVC TC 200 · Plain', 'White', 2500],
+        ['Pillowcase', '50 × 90', 'CVC TC 200 · Plain', 'White', 2700],
+        ['Double Sheet', '300 × 300', 'CVC TC 200 · Plain', 'White', 12000],
+        ['Single Sheet', '210 × 300', 'CVC TC 200 · Plain', 'White', 6000],
+        ['Double Duvet', '270 × 235', 'CVC TC 200 · Plain', 'White', 12000],
+        ['Single Duvet', '170 × 240', 'CVC TC 200 · Plain', 'White', 9000],
+    ]],
+    ['id' => 'tc250-prices', 'name' => 'Bed Linen · TC 250', 'note' => 'CVC · Plain white', 'rows' => [
+        ['Pillowcase', '50 × 70', 'CVC TC 250 · Plain', 'White', 2600],
+        ['Pillowcase', '50 × 90', 'CVC TC 250 · Plain', 'White', 2800],
+        ['Double Sheet', '300 × 300', 'CVC TC 250 · Plain', 'White', 13000],
+        ['Single Sheet', '210 × 300', 'CVC TC 250 · Plain', 'White', 7000],
+        ['Double Duvet', '270 × 235', 'CVC TC 250 · Plain', 'White', 18000],
+        ['Single Duvet', '170 × 240', 'CVC TC 250 · Plain', 'White', 10000],
+    ]],
+    ['id' => 'pool-prices', 'name' => 'Pool Towels', 'note' => 'For poolside use', 'rows' => [
+        ['Pool Towel', 'Confirm with our team', 'Specifications confirmed when booking', 'Dark green / dark blue', 5000],
+    ]],
+];
 function e($value) { return htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); }
 function icon($name, $class = 'h-5 w-5') {
     $paths = ['arrow'=>'<path d="M5 12h14m-6-6 6 6-6 6"/>', 'phone'=>'<path d="M6 3h4l2 5-3 2a15 15 0 0 0 5 5l2-3 5 2v4a3 3 0 0 1-3 3C9 20 4 15 3 6a3 3 0 0 1 3-3Z"/>', 'truck'=>'<path d="M3 6h11v11H3zM14 10h4l3 4v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>', 'layers'=>'<path d="m12 3 10 5-10 5L2 8Zm-10 9 10 5 10-5M2 16l10 5 10-5"/>', 'calendar'=>'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18m-13 5h2m4 0h2"/>', 'pin'=>'<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'];
@@ -112,6 +139,37 @@ function icon($name, $class = 'h-5 w-5') {
         </div>
     </section>
     <div class="border-y border-slate-100 bg-[#f3f6f8]"><div class="wrap grid gap-7 py-8 sm:grid-cols-2 lg:grid-cols-4"><?php foreach ([['truck','Delivery One Day Before Use'],['layers','CVC TC 200 & 250 Options'],['calendar','Flexible Rental Periods'],['pin','Based in Denpasar']] as [$symbol,$label]): ?><div class="flex items-center gap-4 text-sm font-medium"><?= icon($symbol,'h-8 w-8 shrink-0 text-blue') ?><span><?= e($label) ?></span></div><?php endforeach; ?></div></div>
+    <section id="rental-prices" aria-labelledby="prices-heading" class="bg-cream py-16 md:py-20">
+        <div class="wrap">
+            <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+                <div class="max-w-2xl"><p class="eyebrow">THE LINEN COLLECTION · 2026</p><h2 id="prices-heading" class="section-title mt-3">Rental Price List</h2><p class="mt-4 text-sm leading-7 text-slate-600">Find the right linen for your rooms, with daily rental rates at a glance.</p></div>
+                <span class="w-fit rounded-sm border border-gold/30 bg-white px-4 py-3 text-xs font-semibold tracking-wide text-navy">IDR / day</span>
+            </div>
+            <nav aria-label="Price list categories" class="mt-7 flex flex-wrap gap-2">
+                <?php foreach ($rentalPrices as $group): ?><a href="#<?= e($group['id']) ?>" class="rounded-sm border border-slate-300 bg-white px-4 py-3 text-xs font-semibold transition-colors hover:border-gold hover:text-blue"><?= e($group['name']) ?></a><?php endforeach; ?>
+            </nav>
+            <p class="mt-5 text-xs leading-5 text-slate-500 sm:hidden">Swipe each table sideways to see all product details and rates.</p>
+            <div class="mt-6 space-y-6">
+                <?php foreach ($rentalPrices as $group): ?>
+                <div id="<?= e($group['id']) ?>" class="overflow-hidden rounded-sm border border-slate-200 bg-white">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-l-4 border-gold bg-navy px-5 py-4 text-white"><h3 id="<?= e($group['id']) ?>-heading" class="font-display text-xl"><?= e($group['name']) ?></h3><p class="text-xs text-slate-200"><?= e($group['note']) ?></p></div>
+                    <div class="overflow-x-auto" role="region" aria-labelledby="<?= e($group['id']) ?>-heading" tabindex="0">
+                        <table class="w-full min-w-[660px] table-fixed text-left text-sm">
+                            <caption class="sr-only"><?= e($group['name']) ?> daily rental rates in Indonesian rupiah</caption>
+                            <thead class="border-b border-slate-200 bg-slate-50 text-[10px] uppercase tracking-wider text-slate-500"><tr><th scope="col" class="w-[22%] px-5 py-3 font-semibold">Item</th><th scope="col" class="w-[17%] px-4 py-3 font-semibold">Size</th><th scope="col" class="w-[28%] px-4 py-3 font-semibold">Specification</th><th scope="col" class="w-[16%] px-4 py-3 font-semibold">Color</th><th scope="col" class="w-[17%] px-5 py-3 text-right font-semibold">Rental / day</th></tr></thead>
+                            <tbody class="divide-y divide-slate-100">
+                            <?php foreach ($group['rows'] as [$item, $size, $specification, $color, $rate]): ?>
+                                <tr class="transition-colors hover:bg-cream"><th scope="row" class="px-5 py-4 font-semibold text-navy"><?= e($item) ?></th><td class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($size) ?></td><td class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($specification) ?></td><td class="px-4 py-4 text-xs leading-5 text-slate-600"><?= e($color) ?></td><td class="whitespace-nowrap px-5 py-4 text-right font-semibold tabular-nums text-blue"><span class="mr-1 text-xs font-normal text-slate-500">Rp</span><?= number_format($rate, 0, '.', ',') ?></td></tr>
+                            <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="mt-7 flex flex-col justify-between gap-5 sm:flex-row sm:items-center"><p class="max-w-xl text-xs leading-6 text-slate-600">Rates shown in Indonesian rupiah per day. Confirm sizes, availability and delivery arrangements with our team when booking.</p><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary shrink-0">Request a Quote on WhatsApp <?= icon('arrow') ?></a></div>
+        </div>
+    </section>
     <section id="cara-sewa" class="bg-cream py-16 md:py-24"><div class="wrap grid items-center gap-12 lg:grid-cols-2">
         <div class="relative"><img src="assets/images/pillows.jpg" alt="Illustration of neatly folded white linen" loading="lazy" width="768" height="512" class="aspect-[1.15] w-full object-cover"><div class="absolute -bottom-5 right-5 border border-gold/30 bg-white px-6 py-5 shadow-sm"><p class="font-display text-2xl">Your needs,</p><p class="mt-1 text-sm text-slate-600">the right linen selection.</p></div></div>
         <div class="pt-5 lg:pt-0"><p class="eyebrow">HOW TO RENT</p><h2 class="section-title mt-3">Start with what<br>your property needs.</h2><p class="mt-5 leading-7 text-slate-600">Tell us your preferred linen, quantities and rental dates. Discuss the details with the Asia Linen team.</p><ol class="mt-8 space-y-6"><?php foreach ([['Choose your linen','Select the towels, pillowcases, sheets or duvets you need.'],['Share your requirements','Let us know the quantities and your rental start and end dates.'],['Confirm your quote & schedule','Agree on the rental details and delivery schedule with our team.']] as $i => [$title,$copy]): ?><li class="flex gap-5"><span class="pt-1 font-display text-2xl text-gold">0<?= $i+1 ?></span><div><h3 class="font-semibold"><?= e($title) ?></h3><p class="mt-1 text-sm leading-6 text-slate-600"><?= e($copy) ?></p></div></li><?php endforeach; ?></ol></div>

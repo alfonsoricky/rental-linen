@@ -1,6 +1,6 @@
 # Asia Linen
 
-Landing page PHP dengan Tailwind CSS lokal. Konten katalog mengikuti price list 2026; harga dan nominal penggantian tidak dipublikasikan.
+Landing page PHP dengan Tailwind CSS lokal. Konten katalog mengikuti price list 2026; harga sewa harian mengikuti PRICE LIST RENTAL LINEN CBW 2026.docx.pdf; nominal penggantian tidak dipublikasikan.
 
 ## Menjalankan
 
@@ -29,3 +29,7 @@ Logo resmi (marka bunga saat ini merupakan interpretasi desain), satuan ukuran d
 ## Gambar
 
 Tiga ilustrasi dibuat dengan built-in imagegen, kemudian dikonversi ke JPEG untuk web. Bukan foto inventaris aktual. Sumber prompt: `assets/images/PROMPTS.md`.
+
+## Rental price list
+
+17 rates grouped into four responsive tables. Double Duvet TC 200 uses the latest CBW PDF rate of IDR 12,000/day. Pool towel size and weight are left for confirmation because the source specifications are ambiguous. No replacement-fee data or source PDF is included in the page.
