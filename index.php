@@ -25,6 +25,21 @@ $products = [
     ['name' => 'Sheets & Duvets', 'image' => 'hero.jpg', 'alt' => 'Illustration of a bed with white linen in a Bali villa', 'tag' => 'BED COLLECTION', 'description' => 'Complete your rooms with single and double bed linen.', 'spec' => 'Single & Double', 'detail' => 'CVC · TC 200 / TC 250 · Plain white', 'items' => ['Double Sheet — 300 × 300', 'Single Sheet — 210 × 300', 'Double Duvet — 270 × 235', 'Single Duvet — 170 × 240']],
     ['name' => 'Custom Selection', 'image' => 'towels.jpg', 'alt' => 'Illustration of folded white towels and their texture', 'tag' => 'YOUR LINEN SELECTION', 'description' => 'Combine linen to suit the needs of your property.', 'spec' => 'Mixed linen selections & pool towels', 'detail' => 'Pool Towel · Dark green / dark blue', 'items' => ['Choose linen from across our collections', 'Pool Towel — dark green or dark blue', 'Pool towel specifications confirmed when booking']],
 ];
+$gallery = [
+    ['file' => 'bedroom-classic.jpg', 'width' => 963, 'height' => 1280, 'category' => 'Bed Linen', 'title' => 'Classic bedroom', 'alt' => 'White bed linen with a patterned runner in a wooden bed frame'],
+    ['file' => 'bedroom-towel-art.jpg', 'width' => 640, 'height' => 640, 'category' => 'Bed Linen', 'title' => 'The finishing touch', 'alt' => 'White bed linen with decorative folded towels'],
+    ['file' => 'striped-towels.jpg', 'width' => 720, 'height' => 636, 'category' => 'Towels & Robes', 'title' => 'Poolside colours', 'alt' => 'Folded striped towels in blue, grey, brown and orange'],
+    ['file' => 'bedroom-teak.jpg', 'width' => 1280, 'height' => 960, 'category' => 'Bed Linen', 'title' => 'Warm wood, white linen', 'alt' => 'Bedroom with white striped linen, patterned cushions and folded towels'],
+    ['file' => 'outdoor-cushions.jpg', 'width' => 720, 'height' => 718, 'category' => 'Outdoor Living', 'title' => 'Relaxed outdoor living', 'alt' => 'Outdoor bench with grey cushions and blue patterned pillows'],
+    ['file' => 'bedroom-white.jpg', 'width' => 720, 'height' => 1280, 'category' => 'Bed Linen', 'title' => 'Simply comfortable', 'alt' => 'White bed linen and rolled grey towels beneath a rattan pendant light'],
+    ['file' => 'towel-shelves.jpg', 'width' => 1134, 'height' => 1280, 'category' => 'Towels & Robes', 'title' => 'A colourful selection', 'alt' => 'Shelves of neatly folded striped pool towels'],
+    ['file' => 'waffle-robe.jpg', 'width' => 1079, 'height' => 1108, 'category' => 'Towels & Robes', 'title' => 'Waffle texture', 'alt' => 'White waffle kimono bathrobe'],
+    ['file' => 'outdoor-lounge.jpg', 'width' => 720, 'height' => 704, 'category' => 'Outdoor Living', 'title' => 'Space to unwind', 'alt' => 'Grey upholstered outdoor sofa and ottomans with a wooden coffee table'],
+    ['file' => 'towel-colours.jpg', 'width' => 1280, 'height' => 825, 'category' => 'Towels & Robes', 'title' => 'Towel colour palette', 'alt' => 'Towel colour samples labelled white, khaki, grey, turquoise, blue, green, red, brown and black'],
+    ['file' => 'bedroom-runner.jpg', 'width' => 576, 'height' => 1280, 'category' => 'Bed Linen', 'title' => 'Details that complete a room', 'alt' => 'White striped bedding and a coordinated brown patterned runner'],
+    ['file' => 'outdoor-daybed.jpg', 'width' => 720, 'height' => 713, 'category' => 'Outdoor Living', 'title' => 'Ready for a slow afternoon', 'alt' => 'Blue outdoor daybed with rolled towels and colourful cushions'],
+    ['file' => 'white-bedding.jpg', 'width' => 800, 'height' => 800, 'category' => 'Bed Linen', 'title' => 'White linen essentials', 'alt' => 'White pillows, bolster and bedding'],
+];
 $rentalPrices = [
     ['id' => 'towel-prices', 'name' => 'Towels & Bath Mats', 'note' => 'Everyday bathroom essentials', 'rows' => [
         ['Bath Towel', '68 × 140', '30/2 · 550 g/m² · 524 g/pc', 'White', 3000],
@@ -103,12 +118,12 @@ function icon($name, $class = 'h-5 w-5') {
             <span><span class="block font-display text-2xl tracking-wide">ASIA LINEN</span><span class="block text-center text-[9px] tracking-[.43em]">LAUNDRY RENTALS</span></span>
         </a>
         <nav aria-label="Main navigation" class="hidden items-center gap-8 text-sm lg:flex">
-            <a href="#beranda" class="border-b-2 border-gold py-2 font-semibold">Home</a><a href="#koleksi" class="hover:text-gold">Linen Collection</a><a href="#cara-sewa" class="hover:text-gold">How to Rent</a><a href="#faq" class="hover:text-gold">FAQ</a><a href="#kontak" class="hover:text-gold">Contact</a>
+            <a href="#beranda" class="border-b-2 border-gold py-2 font-semibold">Home</a><a href="#koleksi" class="hover:text-gold">Linen Collection</a><a href="#cara-sewa" class="hover:text-gold">How to Rent</a><a href="#gallery" class="hover:text-gold">Gallery</a><a href="#faq" class="hover:text-gold">FAQ</a><a href="#kontak" class="hover:text-gold">Contact</a>
         </nav>
         <a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary hidden sm:inline-flex">Request a Quote <?= icon('arrow') ?></a>
         <button id="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="p-2 lg:hidden"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     </div>
-    <nav id="mobile-menu" aria-label="Mobile navigation" hidden class="border-t border-slate-100 bg-white px-6 py-4 lg:hidden"><div class="flex flex-col gap-4 text-sm"><a href="#beranda">Home</a><a href="#koleksi">Linen Collection</a><a href="#cara-sewa">How to Rent</a><a href="#faq">FAQ</a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer">Request a Quote</a><a href="#kontak">Contact</a></div></nav>
+    <nav id="mobile-menu" aria-label="Mobile navigation" hidden class="border-t border-slate-100 bg-white px-6 py-4 lg:hidden"><div class="flex flex-col gap-4 text-sm"><a href="#beranda">Home</a><a href="#koleksi">Linen Collection</a><a href="#cara-sewa">How to Rent</a><a href="#gallery">Gallery</a><a href="#faq">FAQ</a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer">Request a Quote</a><a href="#kontak">Contact</a></div></nav>
 </header>
 <main id="main">
     <section id="beranda" class="relative isolate overflow-hidden bg-navy text-white">
@@ -175,6 +190,35 @@ function icon($name, $class = 'h-5 w-5') {
         <div class="relative"><img src="assets/images/pillows.jpg" alt="Illustration of neatly folded white linen" loading="lazy" width="768" height="512" class="aspect-[1.15] w-full object-cover"><div class="absolute -bottom-5 right-5 border border-gold/30 bg-white px-6 py-5 shadow-sm"><p class="font-display text-2xl">Your needs,</p><p class="mt-1 text-sm text-slate-600">the right linen selection.</p></div></div>
         <div class="pt-5 lg:pt-0"><p class="eyebrow">HOW TO RENT</p><h2 class="section-title mt-3">Start with what<br>your property needs.</h2><p class="mt-5 leading-7 text-slate-600">Tell us your preferred linen, quantities and rental dates. Discuss the details with the Asia Linen team.</p><ol class="mt-8 space-y-6"><?php foreach ([['Choose your linen','Select the towels, pillowcases, sheets or duvets you need.'],['Share your requirements','Let us know the quantities and your rental start and end dates.'],['Confirm your quote & schedule','Agree on the rental details and delivery schedule with our team.']] as $i => [$title,$copy]): ?><li class="flex gap-5"><span class="pt-1 font-display text-2xl text-gold">0<?= $i+1 ?></span><div><h3 class="font-semibold"><?= e($title) ?></h3><p class="mt-1 text-sm leading-6 text-slate-600"><?= e($copy) ?></p></div></li><?php endforeach; ?></ol></div>
     </div></section>
+    <section id="gallery" aria-labelledby="gallery-heading" class="py-16 md:py-20">
+        <div class="wrap">
+            <div class="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+                <div class="max-w-xl"><p class="eyebrow">THE ASIA LINEN GALLERY</p><h2 id="gallery-heading" class="section-title mt-3">Comfort, in the Details.</h2><p class="mt-4 text-sm leading-7 text-slate-600">Explore bedroom settings, towel textures and outdoor spaces in our photo collection.</p></div>
+                <p class="text-xs text-slate-500">Select a photo for a closer look <span aria-hidden="true">↗</span></p>
+            </div>
+            <div class="gallery-filters" role="group" aria-label="Filter gallery">
+                <?php foreach (['All Photos', 'Bed Linen', 'Towels & Robes', 'Outdoor Living'] as $filter): ?><button type="button" data-gallery-filter="<?= e($filter) ?>" aria-pressed="<?= $filter === 'All Photos' ? 'true' : 'false' ?>"><?= e($filter) ?></button><?php endforeach; ?>
+            </div>
+            <p id="gallery-count" class="sr-only" role="status">13 photos</p>
+            <div class="gallery-grid">
+                <?php foreach ($gallery as $i => $photo): ?>
+                    <figure class="gallery-item" data-category="<?= e($photo['category']) ?>">
+                        <a class="gallery-photo" href="assets/images/gallery/<?= e($photo['file']) ?>" data-gallery-index="<?= $i ?>" aria-label="View photo: <?= e($photo['title']) ?>">
+                            <img src="assets/images/gallery/<?= e($photo['file']) ?>" alt="<?= e($photo['alt']) ?>" loading="lazy" decoding="async" width="<?= $photo['width'] ?>" height="<?= $photo['height'] ?>">
+                            <span class="gallery-expand" aria-hidden="true">↗</span>
+                        </a>
+                        <figcaption><span class="gallery-category"><?= e($photo['category']) ?></span><span class="gallery-title"><?= e($photo['title']) ?></span></figcaption>
+                    </figure>
+                <?php endforeach; ?>
+            </div>
+            <p class="mt-7 border-t border-slate-200 pt-5 text-xs leading-6 text-slate-500">Looking for a particular style or colour? Please confirm product availability with our team.</p>
+        </div>
+    </section>
+    <dialog id="gallery-dialog" aria-labelledby="gallery-dialog-title">
+        <div class="gallery-dialog-toolbar"><p id="gallery-dialog-title">Gallery photo</p><button type="button" id="gallery-close" aria-label="Close photo">✕</button></div>
+        <img id="gallery-full-image" alt="">
+        <div class="gallery-dialog-controls"><button type="button" id="gallery-prev" aria-label="Previous photo">← <span>Previous</span></button><p id="gallery-position" aria-live="polite"></p><button type="button" id="gallery-next" aria-label="Next photo"><span>Next</span> →</button></div>
+    </dialog>
     <section id="faq" class="py-16 md:py-20"><div class="wrap grid gap-8 lg:grid-cols-[.8fr_1.2fr]"><div><p class="eyebrow">RENTAL INFORMATION</p><h2 class="section-title mt-3">Before<br>you rent.</h2><p class="mt-5 max-w-sm text-sm leading-7 text-slate-600">A few things to know when planning your linen rental.</p></div><div>
     <?php foreach ([['Is there a minimum rental period?','There is no minimum rental period. Let us know your required dates when requesting a quote.'],['When is linen delivered and collected?','Linen is delivered one day before use. The collection schedule is confirmed with our team when booking.'],['How do I request a quote?','Click Request a Quote to chat with us on WhatsApp, or use the form below to include your linen selection, quantities and rental dates.'],['What happens if linen is damaged or lost?','Damage, stains, burns or loss are subject to replacement charges under the rental terms. Full details are provided when booking.'],['Do you deliver to my property?','Share your property location with our team to confirm service coverage and delivery arrangements.']] as [$question,$answer]): ?><details class="border-b border-slate-200 py-5"><summary class="flex items-center justify-between gap-5 text-sm font-semibold"><?= e($question) ?><span class="plus text-2xl font-normal text-gold transition-transform">+</span></summary><p class="mt-4 pr-7 text-sm leading-7 text-slate-600"><?= e($answer) ?></p></details><?php endforeach; ?>
     </div></div></section>
@@ -205,8 +249,53 @@ function icon($name, $class = 'h-5 w-5') {
         </div>
     </section>
 </main>
-<footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]">LAUNDRY RENTALS</p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600">Linen and towels to support the everyday needs of your hotel.</p></div><div><h2 class="text-sm font-semibold">Visit & Contact Us</h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600">Jalan Gunung Patas 1 No. 81B<br>Padang Sambian Kelod, Denpasar Barat<br><a class="hover:text-blue" href="tel:+6282237963375"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi">Linen Collection</a><a href="#cara-sewa">How to Rent</a><a href="#faq">Rental Terms</a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer">Request a Quote ↗</a></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500"><p>© <?= date('Y') ?> Asia Linen.</p><p>Illustrative images, not photographs of actual products.</p></div></div></footer>
+<footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]">LAUNDRY RENTALS</p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600">Linen and towels to support the everyday needs of your hotel.</p></div><div><h2 class="text-sm font-semibold">Visit & Contact Us</h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600">Jalan Gunung Patas 1 No. 81B<br>Padang Sambian Kelod, Denpasar Barat<br><a class="hover:text-blue" href="tel:+6282237963375"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi">Linen Collection</a><a href="#cara-sewa">How to Rent</a><a href="#faq">Rental Terms</a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer">Request a Quote ↗</a></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500"><p>© <?= date('Y') ?> Asia Linen.</p><p>Hero and collection images are illustrative. Explore more photos in our gallery.</p></div></div></footer>
 <script>
+
+const galleryItems = [...document.querySelectorAll('.gallery-item')];
+const galleryLinks = galleryItems.map(item => item.querySelector('a'));
+const galleryDialog = document.getElementById('gallery-dialog');
+let galleryVisible = galleryLinks;
+let galleryCurrent = 0;
+let galleryOpener;
+let galleryScrollStyle = '';
+function showGalleryPhoto(position) {
+    galleryCurrent = (position + galleryVisible.length) % galleryVisible.length;
+    const link = galleryVisible[galleryCurrent];
+    const image = document.getElementById('gallery-full-image');
+    image.src = link.href;
+    image.alt = link.querySelector('img').alt;
+    document.getElementById('gallery-dialog-title').textContent = link.closest('figure').querySelector('.gallery-title').textContent;
+    document.getElementById('gallery-position').textContent = `${galleryCurrent + 1} / ${galleryVisible.length}`;
+}
+document.querySelectorAll('[data-gallery-filter]').forEach(button => {
+    button.addEventListener('click', () => {
+        document.querySelectorAll('[data-gallery-filter]').forEach(other => other.setAttribute('aria-pressed', String(other === button)));
+        galleryItems.forEach(item => { item.hidden = button.dataset.galleryFilter !== 'All Photos' && item.dataset.category !== button.dataset.galleryFilter; });
+        galleryVisible = galleryLinks.filter(link => !link.closest('figure').hidden);
+        document.getElementById('gallery-count').textContent = `${galleryVisible.length} photos`;
+    });
+});
+galleryLinks.forEach(link => link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof galleryDialog.showModal !== 'function') return;
+    event.preventDefault();
+    galleryOpener = link;
+    showGalleryPhoto(galleryVisible.indexOf(link));
+    galleryScrollStyle = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    galleryDialog.showModal();
+    document.getElementById('gallery-close').focus();
+}));
+document.getElementById('gallery-close').addEventListener('click', () => galleryDialog.close());
+document.getElementById('gallery-prev').addEventListener('click', () => showGalleryPhoto(galleryCurrent - 1));
+document.getElementById('gallery-next').addEventListener('click', () => showGalleryPhoto(galleryCurrent + 1));
+galleryDialog.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') { event.preventDefault(); showGalleryPhoto(galleryCurrent - 1); }
+    if (event.key === 'ArrowRight') { event.preventDefault(); showGalleryPhoto(galleryCurrent + 1); }
+});
+galleryDialog.addEventListener('click', event => { if (event.target === galleryDialog) { const r = galleryDialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) galleryDialog.close(); } });
+galleryDialog.addEventListener('close', () => { document.body.style.overflow = galleryScrollStyle; galleryOpener?.focus({preventScroll:true}); });
+
 const menuToggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('mobile-menu');
 menuToggle.addEventListener('click', () => { const open = menuToggle.getAttribute('aria-expanded') !== 'true'; menuToggle.setAttribute('aria-expanded', String(open)); menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); menu.hidden = !open; });
