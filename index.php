@@ -38,7 +38,7 @@ $gallery = [
     ['file' => 'towel-colours.jpg', 'width' => 1280, 'height' => 825, 'category' => 'Towels & Robes', 'title' => 'Towel colour palette', 'alt' => 'Towel colour samples labelled white, khaki, grey, turquoise, blue, green, red, brown and black'],
     ['file' => 'bedroom-runner.jpg', 'width' => 576, 'height' => 1280, 'category' => 'Bed Linen', 'title' => 'Details that complete a room', 'alt' => 'White striped bedding and a coordinated brown patterned runner'],
     ['file' => 'outdoor-daybed.jpg', 'width' => 720, 'height' => 713, 'category' => 'Outdoor Living', 'title' => 'Ready for a slow afternoon', 'alt' => 'Blue outdoor daybed with rolled towels and colourful cushions'],
-    ['file' => 'white-bedding.jpg', 'width' => 800, 'height' => 800, 'category' => 'Bed Linen', 'title' => 'White linen essentials', 'alt' => 'White pillows, bolster and bedding'],
+    ['file' => 'white-bedding.jpg', 'width' => 800, 'height' => 800, 'category' => 'Bed Linen', 'title' => 'White linen essentials', 'alt' => 'White pillows and bolster arranged on a bed with white sheets'],
 ];
 $rentalPrices = [
     ['id' => 'towel-prices', 'name' => 'Towels & Bath Mats', 'note' => 'Everyday bathroom essentials', 'rows' => [
@@ -66,6 +66,60 @@ $rentalPrices = [
     ['id' => 'pool-prices', 'name' => 'Pool Towels', 'note' => 'For poolside use', 'rows' => [
         ['Pool Towel', 'Confirm with our team', 'Specifications confirmed when booking', 'Dark green / dark blue', 5000],
     ]],
+];
+// Keep structured data aligned with the visible page and gallery data.
+$siteUrl = 'https://asialinen.com/';
+$galleryImages = array_map(function ($photo) use ($siteUrl) {
+    $url = $siteUrl . 'assets/images/gallery/' . $photo['file'];
+    return [
+        '@type' => 'ImageObject', '@id' => $url . '#image',
+        'contentUrl' => $url, 'url' => $url, 'encodingFormat' => 'image/jpeg',
+        'name' => $photo['title'], 'caption' => $photo['title'],
+        'description' => $photo['alt'], 'width' => $photo['width'], 'height' => $photo['height'],
+    ];
+}, $gallery);
+$structuredData = [
+    '@context' => 'https://schema.org',
+    '@graph' => [
+        [
+            '@type' => 'Organization', '@id' => $siteUrl . '#organization',
+            'name' => 'Asia Linen', 'url' => $siteUrl, 'telephone' => '+6282237963375',
+        ],
+        [
+            '@type' => 'WebSite', '@id' => $siteUrl . '#website',
+            'url' => $siteUrl, 'name' => 'Asia Linen', 'inLanguage' => 'en',
+            'publisher' => ['@id' => $siteUrl . '#organization'],
+        ],
+        [
+            '@type' => 'WebPage', '@id' => $siteUrl . '#webpage', 'url' => $siteUrl,
+            'name' => 'Rental Linen Bali for Hotels & Villas | Asia Linen',
+            'description' => 'Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.',
+            'inLanguage' => 'en', 'isPartOf' => ['@id' => $siteUrl . '#website'],
+            'about' => ['@id' => $siteUrl . '#linen-rental'],
+            'primaryImageOfPage' => ['@id' => $siteUrl . '#hero-image'],
+            'hasPart' => ['@id' => $siteUrl . '#gallery'],
+        ],
+        [
+            '@type' => 'Service', '@id' => $siteUrl . '#linen-rental',
+            'name' => 'Linen Rental in Bali for Hotels & Villas',
+            'serviceType' => 'Linen rental', 'url' => $siteUrl . '#koleksi',
+            'description' => 'Rental of towels, bath mats, pillowcases, sheets and duvets for hotels and villas in Bali.',
+            'provider' => ['@id' => $siteUrl . '#organization'],
+            'areaServed' => ['@type' => 'Place', 'name' => 'Bali'],
+        ],
+        [
+            '@type' => 'ImageObject', '@id' => $siteUrl . '#hero-image',
+            'contentUrl' => $siteUrl . 'assets/images/hero.jpg', 'encodingFormat' => 'image/jpeg',
+            'description' => 'Illustration of a Bali villa bedroom with white bed linen',
+            'width' => 1536, 'height' => 1024,
+        ],
+        [
+            '@type' => 'ImageGallery', '@id' => $siteUrl . '#gallery',
+            'url' => $siteUrl . '#gallery', 'name' => 'The Asia Linen Gallery',
+            'description' => 'Bedroom settings, towel textures and outdoor spaces in our photo collection.',
+            'isPartOf' => ['@id' => $siteUrl . '#webpage'], 'image' => $galleryImages,
+        ],
+    ],
 ];
 function e($value) { return htmlspecialchars($value, ENT_QUOTES, 'UTF-8'); }
 function icon($name, $class = 'h-5 w-5') {
@@ -99,6 +153,8 @@ function icon($name, $class = 'h-5 w-5') {
     <meta property="og:description" content="Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.">
     <meta property="og:url" content="https://asialinen.com/">
     <meta property="og:image" content="https://asialinen.com/assets/images/hero.jpg">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:alt" content="Illustration of a Bali villa bedroom with white bed linen">
     <meta name="twitter:card" content="summary_large_image">
@@ -108,6 +164,7 @@ function icon($name, $class = 'h-5 w-5') {
     <meta name="twitter:image:alt" content="Illustration of a Bali villa bedroom with white bed linen">
     <link rel="stylesheet" href="assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="preload" as="image" href="assets/images/hero.jpg">
+    <script type="application/ld+json"><?= json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR) ?></script>
 </head>
 <body class="bg-white font-sans antialiased">
 <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:p-4">Skip to content</a>
@@ -145,7 +202,7 @@ function icon($name, $class = 'h-5 w-5') {
             <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <?php foreach ($products as $index => $product): ?>
                 <article class="flex flex-col overflow-hidden rounded-sm border border-slate-200 bg-white">
-                    <img src="assets/images/<?= e($product['image']) ?>" alt="<?= e($product['alt']) ?>" width="768" height="512" loading="lazy" class="aspect-[1.5] w-full object-cover <?= $index === 2 ? 'object-right' : '' ?>">
+                    <img src="assets/images/<?= e($product['image']) ?>" alt="<?= e($product['alt']) ?>" width="768" height="512" loading="lazy" decoding="async" class="aspect-[1.5] w-full object-cover <?= $index === 2 ? 'object-right' : '' ?>">
                     <div class="flex flex-1 flex-col p-5"><p class="text-[9px] font-semibold tracking-[.16em] text-gold"><?= e($product['tag']) ?></p><h3 class="mt-2 font-display text-2xl"><?= e($product['name']) ?></h3><p class="mt-3 min-h-15 text-sm leading-6 text-slate-600"><?= e($product['description']) ?></p><p class="mt-4 text-xs font-semibold leading-5"><?= e($product['spec']) ?></p><p class="mt-1 text-xs leading-5 text-slate-500"><?= e($product['detail']) ?></p>
                     <details class="mt-4 border-t border-slate-100 py-3 text-xs"><summary class="flex items-center justify-between font-semibold">View options <span class="plus text-lg transition-transform">+</span></summary><ul class="mt-3 space-y-2 leading-5 text-slate-600"><?php foreach ($product['items'] as $item): ?><li><?= e($item) ?></li><?php endforeach; ?></ul></details>
                     <a href="<?= e($whatsappBase . '?text=' . rawurlencode('Hello Asia Linen, I would like to enquire about ' . $product['name'] . '. Please share availability and a rental quotation.')) ?>" target="_blank" rel="noopener noreferrer" class="btn btn-primary mt-auto !px-3 !text-xs">Enquire About This Collection <?= icon('arrow', 'h-4 w-4') ?></a></div>
@@ -187,7 +244,7 @@ function icon($name, $class = 'h-5 w-5') {
         </div>
     </section>
     <section id="cara-sewa" class="bg-cream py-16 md:py-24"><div class="wrap grid items-center gap-12 lg:grid-cols-2">
-        <div class="relative"><img src="assets/images/pillows.jpg" alt="Illustration of neatly folded white linen" loading="lazy" width="768" height="512" class="aspect-[1.15] w-full object-cover"><div class="absolute -bottom-5 right-5 border border-gold/30 bg-white px-6 py-5 shadow-sm"><p class="font-display text-2xl">Your needs,</p><p class="mt-1 text-sm text-slate-600">the right linen selection.</p></div></div>
+        <div class="relative"><img src="assets/images/pillows.jpg" alt="Illustration of white pillows stacked on folded bed sheets" loading="lazy" decoding="async" width="768" height="512" class="aspect-[1.15] w-full object-cover"><div class="absolute -bottom-5 right-5 border border-gold/30 bg-white px-6 py-5 shadow-sm"><p class="font-display text-2xl">Your needs,</p><p class="mt-1 text-sm text-slate-600">the right linen selection.</p></div></div>
         <div class="pt-5 lg:pt-0"><p class="eyebrow">HOW TO RENT</p><h2 class="section-title mt-3">Start with what<br>your property needs.</h2><p class="mt-5 leading-7 text-slate-600">Tell us your preferred linen, quantities and rental dates. Discuss the details with the Asia Linen team.</p><ol class="mt-8 space-y-6"><?php foreach ([['Choose your linen','Select the towels, pillowcases, sheets or duvets you need.'],['Share your requirements','Let us know the quantities and your rental start and end dates.'],['Confirm your quote & schedule','Agree on the rental details and delivery schedule with our team.']] as $i => [$title,$copy]): ?><li class="flex gap-5"><span class="pt-1 font-display text-2xl text-gold">0<?= $i+1 ?></span><div><h3 class="font-semibold"><?= e($title) ?></h3><p class="mt-1 text-sm leading-6 text-slate-600"><?= e($copy) ?></p></div></li><?php endforeach; ?></ol></div>
     </div></section>
     <section id="gallery" aria-labelledby="gallery-heading" class="py-16 md:py-20">
