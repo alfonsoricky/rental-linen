@@ -50,6 +50,14 @@ Kedua bahasa menggunakan satu `<link rel="icon">` ke `/favicon.ico` tanpa query 
 
 Setelah mengunggah perubahan, periksa source `/en/` dan `/id/` serta akses langsung `/favicon.ico`. Gunakan URL Inspection di Search Console untuk meminta pengindeksan ulang homepage (URL utama mengarah ke `/en/`). Perubahan hasil pencarian menunggu crawl dan pemrosesan Google, bisa beberapa hari hingga beberapa minggu; tidak dijamin langsung tampil. Pertahankan URL ikon yang sama pada pembaruan berikutnya.
 
+## Pratinjau gambar di pencarian
+
+- Gambar pilihan untuk kedua bahasa adalah `assets/images/gallery/bedroom-teak.jpg` (1280 × 960), foto galeri yang memperlihatkan linen putih dan handuk terlipat.
+- `primaryImageOfPage`, `og:image`, dan `twitter:image` memakai data foto galeri yang sama, termasuk ukuran serta deskripsi sesuai bahasa. Bila mengganti gambar pilihan, ubah `$preferredImageUrl` ke foto yang juga tampil di halaman.
+- `max-image-preview:large` mengizinkan pratinjau besar. Google tetap menentukan apakah dan gambar mana yang tampil.
+- `sitemap.xml` memuat 16 URL gambar pada masing-masing halaman bahasa: 13 foto galeri dan 3 ilustrasi yang tampil pada halaman. Sesuaikan daftar ketika aset halaman berubah.
+- Setelah deploy, kirim ulang sitemap di Search Console dan minta pengindeksan `/en/` serta `/id/` melalui URL Inspection. Langkah ini memerlukan akses properti Search Console; push Git tidak mengirim permintaan pengindeksan.
+
 Pemeriksaan konten dan SEO lokal:
 
 ```sh

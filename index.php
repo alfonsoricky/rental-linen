@@ -91,6 +91,9 @@ $galleryImages = array_map(function ($photo) use ($siteUrl) {
         'description' => $photo['alt'], 'width' => $photo['width'], 'height' => $photo['height'],
     ];
 }, $gallery);
+// Reuse a visible gallery photo and its translated description across all previews.
+$preferredImageUrl = $siteUrl . 'assets/images/gallery/bedroom-teak.jpg';
+$preferredImage = array_column($galleryImages, null, 'url')[$preferredImageUrl];
 $structuredData = [
     '@context' => 'https://schema.org',
     '@graph' => [
@@ -116,7 +119,7 @@ $structuredData = [
             'description' => t('Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.'),
             'inLanguage' => $lang, 'isPartOf' => ['@id' => $siteUrl . '#website'],
             'about' => ['@id' => $pageUrl . '#linen-rental'],
-            'primaryImageOfPage' => ['@id' => $pageUrl . '#hero-image'],
+            'primaryImageOfPage' => ['@id' => $preferredImage['@id']],
             'hasPart' => ['@id' => $pageUrl . '#gallery'],
         ],
         [
@@ -127,12 +130,7 @@ $structuredData = [
             'provider' => ['@id' => $siteUrl . '#organization'],
             'areaServed' => ['@type' => 'Place', 'name' => 'Bali'],
         ],
-        [
-            '@type' => 'ImageObject', '@id' => $pageUrl . '#hero-image',
-            'contentUrl' => $siteUrl . 'assets/images/hero.jpg', 'encodingFormat' => 'image/jpeg',
-            'description' => t('Illustration of a Bali villa bedroom with white bed linen'),
-            'width' => 1536, 'height' => 1024,
-        ],
+        $preferredImage,
         [
             '@type' => 'ImageGallery', '@id' => $pageUrl . '#gallery',
             'url' => $pageUrl . '#gallery', 'name' => t('The Asia Linen Gallery'),
@@ -160,6 +158,7 @@ function icon($name, $class = 'h-5 w-5') {
         gtag('config', 'G-27RV0808TM');
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="max-image-preview:large">
     <meta name="description" content="<?= e(t('Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.')) ?>">
     <meta name="theme-color" content="#092849">
     <title><?= e(t('Rental Linen Bali for Hotels & Villas | Asia Linen')) ?></title>
@@ -175,16 +174,16 @@ function icon($name, $class = 'h-5 w-5') {
     <meta property="og:description" content="<?= e(t('Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.')) ?>">
     <meta property="og:url" content="<?= e($pageUrl) ?>">
     <meta property="og:locale:alternate" content="<?= $lang === 'id' ? 'en_GB' : 'id_ID' ?>">
-    <meta property="og:image" content="https://asialinen.com/assets/images/hero.jpg">
-    <meta property="og:image:width" content="1536">
-    <meta property="og:image:height" content="1024">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:alt" content="<?= e(t('Illustration of a Bali villa bedroom with white bed linen')) ?>">
+    <meta property="og:image" content="<?= e($preferredImage['url']) ?>">
+    <meta property="og:image:width" content="<?= $preferredImage['width'] ?>">
+    <meta property="og:image:height" content="<?= $preferredImage['height'] ?>">
+    <meta property="og:image:type" content="<?= e($preferredImage['encodingFormat']) ?>">
+    <meta property="og:image:alt" content="<?= e($preferredImage['description']) ?>">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?= e(t('Rental Linen Bali for Hotels & Villas | Asia Linen')) ?>">
     <meta name="twitter:description" content="<?= e(t('Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.')) ?>">
-    <meta name="twitter:image" content="https://asialinen.com/assets/images/hero.jpg">
-    <meta name="twitter:image:alt" content="<?= e(t('Illustration of a Bali villa bedroom with white bed linen')) ?>">
+    <meta name="twitter:image" content="<?= e($preferredImage['url']) ?>">
+    <meta name="twitter:image:alt" content="<?= e($preferredImage['description']) ?>">
     <link rel="stylesheet" href="<?= e($basePath) ?>assets/css/style.css?v=<?= filemtime(__DIR__ . '/assets/css/style.css') ?>">
     <link rel="preload" as="image" href="<?= e($basePath) ?>assets/images/hero.jpg">
     <script type="application/ld+json"><?= json_encode($structuredData, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR) ?></script>
