@@ -42,6 +42,7 @@ assert all(key.replace("\\'", "'") in translations for key in used), 'Missing tr
 prices = []
 visible_images = {}
 image_alts = {}
+business_identities = []
 for lang in ('en', 'id'):
     for base in ('/', '/rental-linen/'):
         code = "$_SERVER['SCRIPT_NAME'] = '" + base + lang + "/index.php'; require '" + lang + "/index.php';"
@@ -65,6 +66,29 @@ for lang in ('en', 'id'):
             if asset.startswith(base + 'assets/') or asset.startswith(base + 'favicon.ico'):
                 assert (ROOT / asset[len(base):].split('?')[0]).is_file(), asset
         graph = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', page, re.S)[1])['@graph']
+        business = next(node for node in graph if node.get('@id') == 'https://asialinen.com/#organization')
+        assert business['@type'] == 'LocalBusiness' and business['name'] == 'Asia Linen'
+        address = business['address']
+        assert address['@type'] == 'PostalAddress' and address['addressCountry'] == 'ID'
+        footer_address = re.search(r'<address\b[^>]*>(.*?)<a\b', page, re.S)[1]
+        displayed_lines = [html.unescape(line) for line in footer_address.split('<br>') if line]
+        assert address['streetAddress'] == ', '.join(displayed_lines), 'Schema/footer addresses differ'
+        assert f'href="tel:{business["telephone"]}"' in page
+        contact = business['contactPoint']
+        assert contact['telephone'] == business['telephone']
+        assert contact['url'] == 'https://wa.me/' + business['telephone'].lstrip('+')
+        logo = business['logo']
+        logo_url = urlparse(logo['contentUrl'])
+        assert logo_url.scheme == 'https' and logo_url.netloc == 'asialinen.com'
+        svg = ET.parse(ROOT / logo_url.path.lstrip('/')).getroot()
+        assert svg.tag == '{http://www.w3.org/2000/svg}svg'
+        assert int(svg.attrib['width']) == logo['width'] >= 112
+        assert int(svg.attrib['height']) == logo['height'] >= 112
+        business_identities.append({key: business[key] for key in ('@id', 'name', 'url', 'telephone', 'address', 'logo', 'contactPoint')})
+        for node in graph:
+            for relation in ('publisher', 'provider'):
+                if relation in node:
+                    assert node[relation]['@id'] == business['@id'], 'Disconnected business identity'
         webpage = next(node for node in graph if 'WebPage' in node['@type'])
         primary = next(node for node in graph if node.get('@id') == webpage['primaryImageOfPage']['@id'])
         assert primary['@type'] == 'ImageObject' and primary['contentUrl'] == preferred_url
@@ -99,6 +123,7 @@ for lang in ('en', 'id'):
         assert len(rates) == 17
         prices.append([int(re.sub(r'\D', '', rate)) for rate in rates])
 assert all(rates == prices[0] for rates in prices), 'Language switch changed rates'
+assert all(identity == business_identities[0] for identity in business_identities), 'Business identity differs across languages'
 assert image_alts['en'] != image_alts['id'] and translations[image_alts['en']] == image_alts['id']
 sitemap = ET.parse(ROOT / 'sitemap.xml')
 ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9', 'image': 'http://www.google.com/schemas/sitemap-image/1.1'}

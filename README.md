@@ -58,6 +58,12 @@ Setelah mengunggah perubahan, periksa source `/en/` dan `/id/` serta akses langs
 - `sitemap.xml` memuat 16 URL gambar pada masing-masing halaman bahasa: 13 foto galeri dan 3 ilustrasi yang tampil pada halaman. Sesuaikan daftar ketika aset halaman berubah.
 - Setelah deploy, kirim ulang sitemap di Search Console dan minta pengindeksan `/en/` serta `/id/` melalui URL Inspection. Langkah ini memerlukan akses properti Search Console; push Git tidak mengirim permintaan pengindeksan.
 
+## Identitas bisnis terstruktur
+
+Schema `LocalBusiness` memakai identitas yang juga tampil di halaman: Asia Linen, nomor telepon internasional, alamat Jalan Gunung Patas 1 No. 81B di Padang Sambian Kelod, Denpasar Barat, serta kontak WhatsApp. Logo schema memakai `assets/images/logo.svg` berukuran 512 × 512. Publisher situs dan penyedia layanan merujuk ke satu identitas bisnis yang sama.
+
+Kode pos, jam operasional, koordinat, email, dan profil media sosial belum dicantumkan karena datanya belum tersedia. Tambahkan hanya setelah informasi tersebut dikonfirmasi dan ditampilkan secara konsisten di situs.
+
 Pemeriksaan konten dan SEO lokal:
 
 ```sh

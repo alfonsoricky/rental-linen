@@ -7,7 +7,9 @@ if (!isset($lang)) {
 require __DIR__ . '/includes/language.php';
 header('Content-Language: ' . $lang);
 $phone = '0822-3796-3375';
-$whatsappBase = 'https://wa.me/6282237963375';
+$telephone = '+6282237963375';
+$addressLines = ['Jalan Gunung Patas 1 No. 81B', 'Padang Sambian Kelod, Denpasar Barat'];
+$whatsappBase = 'https://wa.me/' . ltrim($telephone, '+');
 $quoteUrl = $whatsappBase . '?text=' . rawurlencode(t('Hello Asia Linen, I would like to request a linen rental quotation.'));
 // Customer relationships supplied by the site owner; unverified property logos remain text-only.
 $customers = [
@@ -98,8 +100,25 @@ $structuredData = [
     '@context' => 'https://schema.org',
     '@graph' => [
         [
-            '@type' => 'Organization', '@id' => $siteUrl . '#organization',
-            'name' => 'Asia Linen', 'url' => $siteUrl, 'telephone' => '+6282237963375',
+            '@type' => 'LocalBusiness', '@id' => $siteUrl . '#organization',
+            'name' => 'Asia Linen', 'url' => $siteUrl, 'telephone' => $telephone,
+            'description' => t('Rental of towels, bath mats, pillowcases, sheets and duvets for hotels and villas in Bali.'),
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => implode(', ', $addressLines),
+                'addressLocality' => 'Denpasar', 'addressRegion' => 'Bali', 'addressCountry' => 'ID',
+            ],
+            'logo' => [
+                '@type' => 'ImageObject', '@id' => $siteUrl . '#logo',
+                'url' => $siteUrl . 'assets/images/logo.svg',
+                'contentUrl' => $siteUrl . 'assets/images/logo.svg',
+                'encodingFormat' => 'image/svg+xml', 'width' => 512, 'height' => 512,
+                'name' => 'Asia Linen',
+            ],
+            'contactPoint' => [
+                '@type' => 'ContactPoint', 'contactType' => 'customer service',
+                'telephone' => $telephone, 'url' => $whatsappBase,
+            ],
         ],
         [
             '@type' => 'WebSite', '@id' => $siteUrl . '#website',
@@ -306,7 +325,7 @@ function icon($name, $class = 'h-5 w-5') {
     <section id="faq" class="py-16 md:py-20"><div class="wrap grid gap-8 lg:grid-cols-[.8fr_1.2fr]"><div><p class="eyebrow"><?= e(t('RENTAL INFORMATION')) ?></p><h2 class="section-title mt-3"><?= e(t('Before')) ?><br><?= e(t('you rent.')) ?></h2><p class="mt-5 max-w-sm text-sm leading-7 text-slate-600"><?= e(t('A few things to know when planning your linen rental.')) ?></p></div><div>
     <?php foreach ($faqs as [$question,$answer]): ?><details class="border-b border-slate-200 py-5"><summary class="flex items-center justify-between gap-5 text-sm font-semibold"><?= e($question) ?><span class="plus text-2xl font-normal text-gold transition-transform">+</span></summary><p class="mt-4 pr-7 text-sm leading-7 text-slate-600"><?= e($answer) ?></p></details><?php endforeach; ?>
     </div></div></section>
-    <section id="penawaran" class="bg-navy py-16 text-white md:py-20"><div class="wrap grid gap-12 lg:grid-cols-2"><div><p class="eyebrow !text-[#e3b873]"><?= e(t('LET’S DISCUSS YOUR REQUIREMENTS')) ?></p><h2 class="section-title mt-4"><?= e(t('Linen for your rooms.')) ?><br><?= e(t('A quote for your needs.')) ?></h2><p class="mt-6 max-w-md leading-7 text-slate-300"><?= e(t('Tell us what you need and continue to WhatsApp with your request ready to send to the Asia Linen team.')) ?></p><a href="tel:+6282237963375" class="mt-8 inline-flex items-center gap-4 text-xl"><?= icon('phone','h-7 w-7 text-[#e3b873]') ?><?= e($phone) ?></a><p class="mt-3 text-sm text-slate-300"><?= e(t('Contact our team for quotations and availability.')) ?></p></div>
+    <section id="penawaran" class="bg-navy py-16 text-white md:py-20"><div class="wrap grid gap-12 lg:grid-cols-2"><div><p class="eyebrow !text-[#e3b873]"><?= e(t('LET’S DISCUSS YOUR REQUIREMENTS')) ?></p><h2 class="section-title mt-4"><?= e(t('Linen for your rooms.')) ?><br><?= e(t('A quote for your needs.')) ?></h2><p class="mt-6 max-w-md leading-7 text-slate-300"><?= e(t('Tell us what you need and continue to WhatsApp with your request ready to send to the Asia Linen team.')) ?></p><a href="tel:<?= e($telephone) ?>" class="mt-8 inline-flex items-center gap-4 text-xl"><?= icon('phone','h-7 w-7 text-[#e3b873]') ?><?= e($phone) ?></a><p class="mt-3 text-sm text-slate-300"><?= e(t('Contact our team for quotations and availability.')) ?></p></div>
     <form id="quote-form" class="rounded-sm bg-white p-6 text-navy md:p-8"><h3 class="font-display text-2xl"><?= e(t('Prepare Your Quote Request')) ?></h3><div class="mt-6 grid gap-4 sm:grid-cols-2"><label class="text-xs font-semibold"><?= e(t('Your name')) ?><input required name="name" autocomplete="name" maxlength="100" class="field" placeholder="<?= e(t('Full name')) ?>"></label><label class="text-xs font-semibold"><?= e(t('Property name')) ?><input required name="property" autocomplete="organization" maxlength="150" class="field" placeholder="<?= e(t('Hotel / property name')) ?>"></label><label class="text-xs font-semibold"><?= e(t('Collection')) ?><select name="product" id="product-select" class="field"><?php foreach ($products as $product): ?><option><?= e($product['name']) ?></option><?php endforeach; ?></select></label><label class="text-xs font-semibold"><?= e(t('Rental start date')) ?><input required type="date" name="date" class="field"></label><label class="text-xs font-semibold sm:col-span-2"><?= e(t('Your requirements')) ?><textarea required name="details" rows="3" maxlength="2000" class="field" placeholder="<?= e(t('Linen types and quantities, rental duration, and property location')) ?>"></textarea></label></div><button type="submit" class="btn btn-primary mt-5 w-full"><?= e(t('Continue to WhatsApp')) ?> <?= icon('arrow') ?></button><p class="mt-3 text-xs leading-5 text-slate-500"><?= e(t('Your request opens in WhatsApp. Review the message and tap Send to share it with our team.')) ?></p></form>
     </div></section>
     <section id="customers" aria-labelledby="customers-heading" class="border-b border-slate-100 bg-cream py-14 md:py-16">
@@ -333,7 +352,7 @@ function icon($name, $class = 'h-5 w-5') {
         </div>
     </section>
 </main>
-<footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]"><?= e(t('LAUNDRY RENTALS')) ?></p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600"><?= e(t('Linen and towels to support the everyday needs of your hotel.')) ?></p></div><div><h2 class="text-sm font-semibold"><?= e(t('Visit & Contact Us')) ?></h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600">Jalan Gunung Patas 1 No. 81B<br>Padang Sambian Kelod, Denpasar Barat<br><a class="hover:text-blue" href="tel:+6282237963375"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi"><?= e(t('Linen Collection')) ?></a><a href="#cara-sewa"><?= e(t('How to Rent')) ?></a><a href="#faq"><?= e(t('Rental Terms')) ?></a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer"><?= e(t('Request a Quote ↗')) ?></a></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500"><p>© <?= date('Y') ?> Asia Linen.</p><p><?= e(t('Hero and collection images are illustrative. Explore more photos in our gallery.')) ?></p></div></div></footer>
+<footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]"><?= e(t('LAUNDRY RENTALS')) ?></p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600"><?= e(t('Linen and towels to support the everyday needs of your hotel.')) ?></p></div><div><h2 class="text-sm font-semibold"><?= e(t('Visit & Contact Us')) ?></h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600"><?= e($addressLines[0]) ?><br><?= e($addressLines[1]) ?><br><a class="hover:text-blue" href="tel:<?= e($telephone) ?>"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi"><?= e(t('Linen Collection')) ?></a><a href="#cara-sewa"><?= e(t('How to Rent')) ?></a><a href="#faq"><?= e(t('Rental Terms')) ?></a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer"><?= e(t('Request a Quote ↗')) ?></a></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-500"><p>© <?= date('Y') ?> Asia Linen.</p><p><?= e(t('Hero and collection images are illustrative. Explore more photos in our gallery.')) ?></p></div></div></footer>
 <script>
 
 const ui = <?= json_encode([
