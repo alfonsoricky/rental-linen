@@ -33,3 +33,19 @@ Tiga ilustrasi dibuat dengan built-in imagegen, kemudian dikonversi ke JPEG untu
 ## Rental price list
 
 17 rates grouped into four responsive tables. Double Duvet TC 200 uses the latest CBW PDF rate of IDR 12,000/day. Pool towel size and weight are left for confirmation because the source specifications are ambiguous. No replacement-fee data or source PDF is included in the page.
+
+## Bahasa dan SEO
+
+- `/en/` menampilkan konten Inggris; `/id/` menampilkan terjemahan Indonesia. Keduanya dirender oleh PHP sehingga konten dan schema dapat dibaca tanpa JavaScript.
+- `/` dan `/index.php` mengalihkan dengan HTTP 301 ke `/en/`. Tombol EN / ID tersedia pada desktop dan seluler; bagian halaman yang sedang dibuka dipertahankan ketika JavaScript aktif.
+- `en/index.php` dan `id/index.php` memakai template bersama `index.php`. Teks Inggris berada di pemanggilan `t(...)`; terjemahan Indonesia ada di `includes/id.json`. FAQ HTML dan `FAQPage` tetap berasal dari array yang sama.
+- Setiap bahasa memiliki canonical sendiri, hreflang EN / ID / x-default, judul, deskripsi, metadata Open Graph dan Twitter, serta structured data sesuai bahasa. `sitemap.xml` memuat kedua URL canonical.
+- Harga dan spesifikasi mengikuti konten yang sudah ada. Pemisah ribuan harga dan pesan WhatsApp menyesuaikan bahasa.
+- Saat deploy, unggah **seluruh perubahan**, termasuk folder `en`, `id`, `includes`, CSS hasil build, dan sitemap; jangan hanya unggah `index.php`. Tidak memerlukan rewrite khusus untuk URL folder bahasa pada hosting PHP dengan DirectoryIndex `index.php`.
+- Setelah deploy, kirim ulang `https://asialinen.com/sitemap.xml` di Search Console dan periksa kedua URL bahasa.
+
+Pemeriksaan konten dan SEO lokal:
+
+```sh
+python3 tests/check_languages.py /path/to/php
+```

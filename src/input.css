@@ -90,3 +90,17 @@ details[open] summary .plus { transform: rotate(45deg); }
  #gallery-dialog { padding:12px; }
  .gallery-dialog-toolbar p { font-size:17px; }
 }
+
+.language-switcher { display: flex; align-items: center; gap: 2px; flex-shrink: 0; font-size: 12px; }
+.language-switcher a { display: inline-flex; min-width: 34px; min-height: 44px; align-items: center; justify-content: center; }
+.language-switcher a[aria-current="page"] { color: var(--color-blue); font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }
+.language-switcher span { color: #94a3b8; }
+.site-brand { flex-shrink: 0; white-space: nowrap; }
+@media (max-width: 639px) {
+  header .wrap { padding-inline: 12px; gap: 6px; }
+  .site-brand { gap: 6px; }
+  .site-brand svg { width: 36px; height: 36px; }
+  .site-brand .font-display { font-size: 20px; }
+  .site-brand > span > span:last-child { font-size: 7px; letter-spacing: .25em; }
+  .language-switcher a { min-width: 30px; }
+}
