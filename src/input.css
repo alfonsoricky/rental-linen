@@ -4,6 +4,7 @@
   --color-navy: #092849;
   --color-blue: #104d80;
   --color-gold: #b98c49;
+  --color-gold-text: #8a642c;
   --color-cream: #f8f6f2;
   --font-sans: Arial, Helvetica, sans-serif;
   --font-display: Georgia, 'Times New Roman', serif;
@@ -17,7 +18,7 @@
 }
 @layer components {
   .wrap { @apply mx-auto w-full max-w-7xl px-6 lg:px-10; }
-  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-gold; }
+  .eyebrow { @apply text-[11px] font-semibold uppercase tracking-[0.24em] text-gold-text; }
   .btn { @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm px-6 py-3 text-sm font-semibold transition-colors; }
   .btn-primary { @apply bg-blue text-white hover:bg-navy; }
   .section-title { @apply font-display text-3xl leading-tight md:text-[42px]; }
