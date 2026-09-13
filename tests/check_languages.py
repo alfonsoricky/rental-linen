@@ -29,6 +29,11 @@ for lang in ('en', 'id'):
         for alternate, path in [('en', 'en'), ('id', 'id'), ('x-default', 'en')]:
             assert f'hreflang="{alternate}" href="https://asialinen.com/{path}/"' in page
         assert f'href="{base}en/"' in page and f'href="{base}id/"' in page
+        # One stable, shared ICO URL for both languages and local subdirectory installs.
+        icons = re.findall(r'<link\b[^>]*\brel="icon"[^>]*>', page)
+        assert len(icons) == 1, 'Competing favicon declarations'
+        assert f'href="{base}favicon.ico"' in icons[0], 'Favicon URL must stay stable'
+        assert 'type="image/x-icon"' in icons[0]
         for asset in re.findall(r'(?:src|href)="([^"]+)"', page):
             if asset.startswith(base + 'assets/') or asset.startswith(base + 'favicon.ico'):
                 assert (ROOT / asset[len(base):].split('?')[0]).is_file(), asset
@@ -51,4 +56,4 @@ for lang in ('en', 'id'):
 assert all(rates == prices[0] for rates in prices), 'Language switch changed rates'
 sitemap = ET.parse(ROOT / 'sitemap.xml')
 assert {n.text for n in sitemap.findall('.//{*}loc')} == {'https://asialinen.com/en/', 'https://asialinen.com/id/'}
-print('PASS: EN/ID metadata, hreflang, FAQ consistency, assets, subdirectory links, translations, 17 rates, sitemap')
+print('PASS: EN/ID metadata, hreflang, FAQ consistency, favicon, assets, subdirectory links, translations, 17 rates, sitemap')

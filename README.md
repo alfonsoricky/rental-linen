@@ -44,6 +44,12 @@ Tiga ilustrasi dibuat dengan built-in imagegen, kemudian dikonversi ke JPEG untu
 - Saat deploy, unggah **seluruh perubahan**, termasuk folder `en`, `id`, `includes`, CSS hasil build, dan sitemap; jangan hanya unggah `index.php`. Tidak memerlukan rewrite khusus untuk URL folder bahasa pada hosting PHP dengan DirectoryIndex `index.php`.
 - Setelah deploy, kirim ulang `https://asialinen.com/sitemap.xml` di Search Console dan periksa kedua URL bahasa.
 
+## Favicon
+
+Kedua bahasa menggunakan satu `<link rel="icon">` ke `/favicon.ico` tanpa query versi. File ICO berisi ukuran 16, 32, 48, dan 64 piksel. SVG disimpan sebagai aset sumber, tetapi tidak ditawarkan sebagai favicon alternatif karena SVG tidak tercantum dalam daftar format Google Search saat ini.
+
+Setelah mengunggah perubahan, periksa source `/en/` dan `/id/` serta akses langsung `/favicon.ico`. Gunakan URL Inspection di Search Console untuk meminta pengindeksan ulang homepage (URL utama mengarah ke `/en/`). Perubahan hasil pencarian menunggu crawl dan pemrosesan Google, bisa beberapa hari hingga beberapa minggu; tidak dijamin langsung tampil. Pertahankan URL ikon yang sama pada pembaruan berikutnya.
+
 Pemeriksaan konten dan SEO lokal:
 
 ```sh

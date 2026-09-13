@@ -163,8 +163,7 @@ function icon($name, $class = 'h-5 w-5') {
     <meta name="description" content="<?= e(t('Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.')) ?>">
     <meta name="theme-color" content="#092849">
     <title><?= e(t('Rental Linen Bali for Hotels & Villas | Asia Linen')) ?></title>
-    <link rel="icon" href="<?= e($basePath) ?>favicon.ico?v=1" type="image/x-icon" sizes="16x16 32x32 48x48 64x64">
-    <link rel="icon" href="<?= e($basePath) ?>assets/images/favicon.svg?v=1" type="image/svg+xml">
+    <link rel="icon" href="<?= e($basePath) ?>favicon.ico" type="image/x-icon" sizes="16x16 32x32 48x48 64x64">
     <link rel="canonical" href="<?= e($pageUrl) ?>">
     <link rel="alternate" hreflang="en" href="https://asialinen.com/en/">
     <link rel="alternate" hreflang="id" href="https://asialinen.com/id/">
