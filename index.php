@@ -67,6 +67,13 @@ $rentalPrices = [
         ['Pool Towel', 'Confirm with our team', 'Specifications confirmed when booking', 'Dark green / dark blue', 5000],
     ]],
 ];
+$faqs = [
+    ['Is there a minimum rental period?','There is no minimum rental period. Let us know your required dates when requesting a quote.'],
+    ['When is linen delivered and collected?','Linen is delivered one day before use. The collection schedule is confirmed with our team when booking.'],
+    ['How do I request a quote?','Click Request a Quote to chat with us on WhatsApp, or use the form below to include your linen selection, quantities and rental dates.'],
+    ['What happens if linen is damaged or lost?','Damage, stains, burns or loss are subject to replacement charges under the rental terms. Full details are provided when booking.'],
+    ['Do you deliver to my property?','Share your property location with our team to confirm service coverage and delivery arrangements.'],
+];
 // Keep structured data aligned with the visible page and gallery data.
 $siteUrl = 'https://asialinen.com/';
 $galleryImages = array_map(function ($photo) use ($siteUrl) {
@@ -91,7 +98,14 @@ $structuredData = [
             'publisher' => ['@id' => $siteUrl . '#organization'],
         ],
         [
-            '@type' => 'WebPage', '@id' => $siteUrl . '#webpage', 'url' => $siteUrl,
+            '@type' => ['WebPage', 'FAQPage'], '@id' => $siteUrl . '#webpage', 'url' => $siteUrl,
+            'mainEntity' => array_map(function ($faq) {
+                return [
+                    '@type' => 'Question',
+                    'name' => $faq[0],
+                    'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq[1]],
+                ];
+            }, $faqs),
             'name' => 'Rental Linen Bali for Hotels & Villas | Asia Linen',
             'description' => 'Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.',
             'inLanguage' => 'en', 'isPartOf' => ['@id' => $siteUrl . '#website'],
@@ -277,7 +291,7 @@ function icon($name, $class = 'h-5 w-5') {
         <div class="gallery-dialog-controls"><button type="button" id="gallery-prev" aria-label="Previous photo">← <span>Previous</span></button><p id="gallery-position" aria-live="polite"></p><button type="button" id="gallery-next" aria-label="Next photo"><span>Next</span> →</button></div>
     </dialog>
     <section id="faq" class="py-16 md:py-20"><div class="wrap grid gap-8 lg:grid-cols-[.8fr_1.2fr]"><div><p class="eyebrow">RENTAL INFORMATION</p><h2 class="section-title mt-3">Before<br>you rent.</h2><p class="mt-5 max-w-sm text-sm leading-7 text-slate-600">A few things to know when planning your linen rental.</p></div><div>
-    <?php foreach ([['Is there a minimum rental period?','There is no minimum rental period. Let us know your required dates when requesting a quote.'],['When is linen delivered and collected?','Linen is delivered one day before use. The collection schedule is confirmed with our team when booking.'],['How do I request a quote?','Click Request a Quote to chat with us on WhatsApp, or use the form below to include your linen selection, quantities and rental dates.'],['What happens if linen is damaged or lost?','Damage, stains, burns or loss are subject to replacement charges under the rental terms. Full details are provided when booking.'],['Do you deliver to my property?','Share your property location with our team to confirm service coverage and delivery arrangements.']] as [$question,$answer]): ?><details class="border-b border-slate-200 py-5"><summary class="flex items-center justify-between gap-5 text-sm font-semibold"><?= e($question) ?><span class="plus text-2xl font-normal text-gold transition-transform">+</span></summary><p class="mt-4 pr-7 text-sm leading-7 text-slate-600"><?= e($answer) ?></p></details><?php endforeach; ?>
+    <?php foreach ($faqs as [$question,$answer]): ?><details class="border-b border-slate-200 py-5"><summary class="flex items-center justify-between gap-5 text-sm font-semibold"><?= e($question) ?><span class="plus text-2xl font-normal text-gold transition-transform">+</span></summary><p class="mt-4 pr-7 text-sm leading-7 text-slate-600"><?= e($answer) ?></p></details><?php endforeach; ?>
     </div></div></section>
     <section id="penawaran" class="bg-navy py-16 text-white md:py-20"><div class="wrap grid gap-12 lg:grid-cols-2"><div><p class="eyebrow !text-[#e3b873]">LET’S DISCUSS YOUR REQUIREMENTS</p><h2 class="section-title mt-4">Linen for your rooms.<br>A quote for your needs.</h2><p class="mt-6 max-w-md leading-7 text-slate-300">Tell us what you need and continue to WhatsApp with your request ready to send to the Asia Linen team.</p><a href="tel:+6282237963375" class="mt-8 inline-flex items-center gap-4 text-xl"><?= icon('phone','h-7 w-7 text-[#e3b873]') ?><?= e($phone) ?></a><p class="mt-3 text-sm text-slate-300">Contact our team for quotations and availability.</p></div>
     <form id="quote-form" class="rounded-sm bg-white p-6 text-navy md:p-8"><h3 class="font-display text-2xl">Prepare Your Quote Request</h3><div class="mt-6 grid gap-4 sm:grid-cols-2"><label class="text-xs font-semibold">Your name<input required name="name" autocomplete="name" maxlength="100" class="field" placeholder="Full name"></label><label class="text-xs font-semibold">Property name<input required name="property" autocomplete="organization" maxlength="150" class="field" placeholder="Hotel / property name"></label><label class="text-xs font-semibold">Collection<select name="product" id="product-select" class="field"><?php foreach ($products as $product): ?><option><?= e($product['name']) ?></option><?php endforeach; ?></select></label><label class="text-xs font-semibold">Rental start date<input required type="date" name="date" class="field"></label><label class="text-xs font-semibold sm:col-span-2">Your requirements<textarea required name="details" rows="3" maxlength="2000" class="field" placeholder="Linen types and quantities, rental duration, and property location"></textarea></label></div><button type="submit" class="btn btn-primary mt-5 w-full">Continue to WhatsApp <?= icon('arrow') ?></button><p class="mt-3 text-xs leading-5 text-slate-500">Your request opens in WhatsApp. Review the message and tap Send to share it with our team.</p></form>
