@@ -36,7 +36,7 @@ image_info = json.loads(subprocess.run(
     check=True, capture_output=True, text=True,
 ).stdout)
 translations = json.loads((ROOT / 'includes/id.json').read_text())
-source = (ROOT / 'index.php').read_text()
+source = (ROOT / 'index.php').read_text() + (ROOT / 'includes/cookie-consent.php').read_text()
 used = re.findall(r"\bt\('((?:\\.|[^'\\])*)'\)", source)
 assert all(key.replace("\\'", "'") in translations for key in used), 'Missing translation'
 prices = []

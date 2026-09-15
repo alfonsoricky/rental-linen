@@ -1,6 +1,11 @@
 # Customer logo sources
 
-Customer names and service relationships supplied by the website owner. Logos downloaded from the following official websites. Names without verified logos are rendered as text.
+Customer names and service relationships supplied by the website owner. Logos are supplied by the owner or downloaded from the official websites below. Names without supplied or verified logos are rendered as text.
+
+- aloft-bali-kuta.png: supplied by the website owner on 2026-09-14 as `aloft-bali-kuta.png`, for Aloft Bali Kuta at Beachwalk.
+- aloft-bali-seminyak.png: supplied by the website owner on 2026-09-14 as `Aloft-Bali-Seminyak-Logo-Pink.png`, explicitly assigned to the Aloft Petitenget card. The customer name remains Aloft Petitenget.
+- crystal-kuta.png: supplied by the website owner on 2026-09-14 as `Screenshot 2026-09-14 at 15.03.42.png`, explicitly assigned to the Crystal Hotel card.
+- lv8-resort-hotel.png: supplied by the website owner on 2026-09-14 as `logo-lv8-canggu.png`, for LV8 Resort Hotel.
 
 - intercontinental-sanur.png: https://balisanur.intercontinental.com/wp-content/uploads/2022/10/InterContinental-Sanur-Logo.png
 - k-club-ubud.webp: https://www.kclububud.com/logonavbar.webp

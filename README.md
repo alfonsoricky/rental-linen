@@ -22,6 +22,22 @@ Untuk build produksi: `npm run build`.
 - Formulir membuka WhatsApp dengan detail permintaan yang sudah diisi; pengunjung menekan Send di WhatsApp untuk mengirimnya.
 - Nomor kontak tetap dapat ditelepon; tombol penawaran menggunakan WhatsApp yang telah dikonfirmasi.
 
+## Preferensi cookie
+
+- Banner dan dialog tersedia dalam EN/ID. Pilihan disimpan di `localStorage` dengan key `asialinen-cookie-consent`, versi 1, berlaku 180 hari untuk kedua bahasa. Jika penyimpanan diblokir browser, pilihan hanya berlaku di halaman tersebut dan pengunjung diberi tahu.
+- Google Analytics `G-27RV0808TM` menggunakan basic consent mode: tag Google baru dimuat setelah analitik diterima. Penolakan, pilihan kedaluwarsa/rusak, atau JavaScript nonaktif tidak memuat Analytics. Tidak ada pengaktifan cookie iklan.
+- Pengaturan dapat dibuka kembali dari footer. Mencabut izin mengaktifkan flag opt-out Google, menghapus cookie Analytics yang dapat diakses, dan menghentikan pelacakan kontak; perubahan disinkronkan ke tab lain. Data yang sebelumnya sudah dikirim tidak dihapus dari Google.
+- WhatsApp dan formulir tetap berfungsi tanpa persetujuan analitik. Peristiwa sebelum persetujuan tidak disimpan untuk dikirim belakangan; isi formulir dan URL WhatsApp tidak dimasukkan dalam event kontak.
+- Dasar implementasi: [Google basic consent mode](https://developers.google.com/tag-platform/security/concepts/consent-mode) dan [Google Analytics opt-out](https://developers.google.com/tag-platform/security/guides/privacy).
+
+Uji alur cookie dengan server PHP lokal aktif dan Playwright tersedia:
+
+```sh
+node tests/check_cookie_consent.cjs http://127.0.0.1:8090
+```
+
+Jika Playwright/Chrome berada di lokasi lain, tentukan `PLAYWRIGHT_MODULE` dan `CHROME_EXECUTABLE_PATH`. Tes mencegat seluruh permintaan Google sehingga tidak mengirim data uji ke Analytics produksi.
+
 ## Konten yang perlu dikonfirmasi
 
 Logo resmi (marka bunga saat ini merupakan interpretasi desain), satuan ukuran dalam PDF, jenis produk “Duve”, spesifikasi Pool Towel, area layanan, ketentuan biaya pengiriman, serta jadwal pengambilan. Tidak ada klaim pengiriman gratis, testimoni, atau paket jumlah kamar yang dibuat-buat.

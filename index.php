@@ -13,11 +13,11 @@ $whatsappBase = 'https://wa.me/' . ltrim($telephone, '+');
 $quoteUrl = $whatsappBase . '?text=' . rawurlencode(t('Hello Asia Linen, I would like to request a linen rental quotation.'));
 // Customer relationships supplied by the site owner; unverified property logos remain text-only.
 $customers = [
-    ['name' => 'Aloft Bali Kuta at Beachwalk', 'logo' => null],
+    ['name' => 'Aloft Bali Kuta at Beachwalk', 'logo' => 'aloft-bali-kuta.png'],
     ['name' => 'InterContinental Bali Sanur Resort', 'logo' => 'intercontinental-sanur.png'],
-    ['name' => 'Aloft Petitenget', 'logo' => null],
-    ['name' => 'Crystal Hotel', 'logo' => null],
-    ['name' => 'LV8 Resort Hotel', 'logo' => null],
+    ['name' => 'Aloft Petitenget', 'logo' => 'aloft-bali-seminyak.png'],
+    ['name' => 'Crystal Hotel', 'logo' => 'crystal-kuta.png'],
+    ['name' => 'LV8 Resort Hotel', 'logo' => 'lv8-resort-hotel.png'],
     ['name' => 'Seminyak Private Villas', 'logo' => null],
     ['name' => 'K-Club Ubud', 'logo' => 'k-club-ubud.webp'],
     ['name' => 'Mahagiri', 'logo' => null],
@@ -168,14 +168,6 @@ function icon($name, $class = 'h-5 w-5') {
 <html lang="<?= e($lang) ?>">
 <head>
     <meta charset="UTF-8">
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-27RV0808TM"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-27RV0808TM');
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="max-image-preview:large">
     <meta name="description" content="<?= e(t('Rent towels, sheets, pillowcases and duvets for hotels and villas in Bali. Flexible rental periods. Request a quotation from Asia Linen.')) ?>">
@@ -352,7 +344,9 @@ function icon($name, $class = 'h-5 w-5') {
         </div>
     </section>
 </main>
-<footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]"><?= e(t('LAUNDRY RENTALS')) ?></p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600"><?= e(t('Linen and towels to support the everyday needs of your hotel.')) ?></p></div><div><h2 class="text-sm font-semibold"><?= e(t('Visit & Contact Us')) ?></h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600"><?= e($addressLines[0]) ?><br><?= e($addressLines[1]) ?><br><a class="hover:text-blue" href="tel:<?= e($telephone) ?>"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi"><?= e(t('Linen Collection')) ?></a><a href="#cara-sewa"><?= e(t('How to Rent')) ?></a><a href="#faq"><?= e(t('Rental Terms')) ?></a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer"><?= e(t('Request a Quote ↗')) ?></a></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-600"><p>© <?= date('Y') ?> Asia Linen.</p><p><?= e(t('Hero and collection images are illustrative. Explore more photos in our gallery.')) ?></p></div></div></footer>
+<footer id="kontak" class="bg-cream py-12"><div class="wrap"><div class="grid gap-8 md:grid-cols-[1fr_1fr_auto]"><div><p class="font-display text-2xl">ASIA LINEN</p><p class="mt-2 text-[10px] tracking-[.3em]"><?= e(t('LAUNDRY RENTALS')) ?></p><p class="mt-4 max-w-xs text-sm leading-6 text-slate-600"><?= e(t('Linen and towels to support the everyday needs of your hotel.')) ?></p></div><div><h2 class="text-sm font-semibold"><?= e(t('Visit & Contact Us')) ?></h2><address class="mt-4 text-sm not-italic leading-7 text-slate-600"><?= e($addressLines[0]) ?><br><?= e($addressLines[1]) ?><br><a class="hover:text-blue" href="tel:<?= e($telephone) ?>"><?= e($phone) ?></a></address></div><div class="flex flex-col gap-3 text-sm"><a href="#koleksi"><?= e(t('Linen Collection')) ?></a><a href="#cara-sewa"><?= e(t('How to Rent')) ?></a><a href="#faq"><?= e(t('Rental Terms')) ?></a><a href="<?= e($quoteUrl) ?>" target="_blank" rel="noopener noreferrer"><?= e(t('Request a Quote ↗')) ?></a><button type="button" id="cookie-footer-settings" class="cookie-footer-settings" data-cookie-settings hidden><?= e(t('Cookie settings')) ?></button></div></div><div class="mt-9 flex flex-wrap justify-between gap-3 border-t border-slate-200 pt-6 text-xs text-slate-600"><p>© <?= date('Y') ?> Asia Linen.</p><p><?= e(t('Hero and collection images are illustrative. Explore more photos in our gallery.')) ?></p></div></div></footer>
+<?php require __DIR__ . '/includes/cookie-consent.php'; ?>
+<script src="<?= e($basePath) ?>assets/js/cookie-consent.js?v=<?= filemtime(__DIR__ . '/assets/js/cookie-consent.js') ?>" data-measurement-id="G-27RV0808TM"></script>
 <script>
 
 const ui = <?= json_encode([
@@ -419,18 +413,15 @@ document.addEventListener('keydown', event => { if (event.key === 'Escape' && !m
 // Track only the interaction source, never WhatsApp URLs or form contents.
 document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
     link.addEventListener('click', () => {
-        gtag('event', 'whatsapp_click', {
-            contact_source: link.closest('section')?.id || (link.closest('header') ? 'header' : 'footer'),
-            transport_type: 'beacon'
-        });
+        window.AsiaLinenConsent?.trackContact(link.closest('section')?.id || (link.closest('header') ? 'header' : 'footer'));
     });
 });
 const form = document.getElementById('quote-form');
 form.addEventListener('submit', event => { event.preventDefault(); const data = new FormData(form); const date = new Date(data.get('date') + 'T12:00:00').toLocaleDateString(ui.locale, {day:'numeric', month:'long', year:'numeric'}); const message = `${ui.quoteIntro}\n\n${ui.name}: ${data.get('name').trim()}\n${ui.property}: ${data.get('property').trim()}\n${ui.collection}: ${data.get('product')}\n${ui.rentalStart}: ${date}\n${ui.requirements}: ${data.get('details').trim()}`; const url = <?= json_encode($whatsappBase) ?> + '?text=' + encodeURIComponent(message);
     let opened = false;
     const openWhatsApp = () => { if (!opened) { opened = true; window.location.assign(url); } };
-    setTimeout(openWhatsApp, 1000);
-    gtag('event', 'whatsapp_click', { contact_source: 'quote_form', transport_type: 'beacon', event_callback: openWhatsApp, event_timeout: 1000 }); });
+    if (window.AsiaLinenConsent) window.AsiaLinenConsent.trackContact('quote_form', openWhatsApp);
+    else openWhatsApp(); });
 </script>
 </body>
 </html>

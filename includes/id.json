@@ -212,5 +212,22 @@
   "Property": "Properti",
   "Requirements": "Kebutuhan",
   "photos": "foto",
-  "daily rental rates in Indonesian rupiah": "— tarif sewa harian dalam rupiah"
+  "daily rental rates in Indonesian rupiah": "— tarif sewa harian dalam rupiah",
+  "Your cookie choices": "Pilihan cookie Anda",
+  "With your permission, we use Google Analytics cookies to understand visits to our website. You can browse and request a quote without them.": "Dengan izin Anda, kami menggunakan cookie Google Analytics untuk memahami kunjungan ke situs kami. Anda tetap bisa menjelajah dan meminta penawaran tanpa cookie tersebut.",
+  "Accept all": "Terima semua",
+  "Reject optional": "Tolak tambahan",
+  "Set preferences": "Atur preferensi",
+  "Cookie settings": "Pengaturan cookie",
+  "Close cookie settings": "Tutup pengaturan cookie",
+  "Choose whether to allow analytics. You can change your choice at any time using Cookie settings at the bottom of the page.": "Pilih apakah Anda mengizinkan analitik. Pilihan dapat diubah kapan saja melalui Pengaturan cookie di bagian bawah halaman.",
+  "Remember your choice": "Mengingat pilihan Anda",
+  "Always active": "Selalu aktif",
+  "Your preference is stored in this browser for 180 days and applies to both language versions. This storage is needed to remember your choice.": "Preferensi disimpan di browser ini selama 180 hari dan berlaku untuk kedua versi bahasa. Penyimpanan ini diperlukan untuk mengingat pilihan Anda.",
+  "Analytics cookies": "Cookie analitik",
+  "Google Analytics uses cookies such as _ga to measure page visits and interactions, including quote button clicks. It only loads when you allow analytics.": "Google Analytics menggunakan cookie seperti _ga untuk mengukur kunjungan halaman dan interaksi, termasuk klik tombol penawaran. Layanan ini hanya dimuat jika Anda mengizinkan analitik.",
+  "Google Privacy Policy (opens in a new tab)": "Kebijakan Privasi Google (dibuka di tab baru)",
+  "Save preferences": "Simpan preferensi",
+  "Cookie preferences saved.": "Preferensi cookie disimpan.",
+  "Your choice applies to this page. Your browser could not save it for future visits.": "Pilihan berlaku di halaman ini. Browser Anda tidak dapat menyimpannya untuk kunjungan berikutnya."
 }
